@@ -6,9 +6,18 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0BD8C1BB24D62F1800277296 /* AddAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1BA24D62F1800277296 /* AddAccountUseCase.swift */; };
+		0BD8C1BE24D633EC00277296 /* AddAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1BD24D633EC00277296 /* AddAccountModel.swift */; };
+		0BD8C1C024D6341600277296 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1BF24D6341600277296 /* AccountModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0BD8C1B224D62D0700277296 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD8C1B524D62D0700277296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BD8C1BA24D62F1800277296 /* AddAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountUseCase.swift; sourceTree = "<group>"; };
+		0BD8C1BD24D633EC00277296 /* AddAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountModel.swift; sourceTree = "<group>"; };
+		0BD8C1BF24D6341600277296 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,9 +50,28 @@
 		0BD8C1B324D62D0700277296 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0BD8C1C124D6342700277296 /* Model */,
+				0BD8C1BC24D633C400277296 /* AddAccountUseCase */,
 				0BD8C1B524D62D0700277296 /* Info.plist */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		0BD8C1BC24D633C400277296 /* AddAccountUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				0BD8C1BA24D62F1800277296 /* AddAccountUseCase.swift */,
+				0BD8C1BD24D633EC00277296 /* AddAccountModel.swift */,
+			);
+			path = AddAccountUseCase;
+			sourceTree = "<group>";
+		};
+		0BD8C1C124D6342700277296 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0BD8C1BF24D6341600277296 /* AccountModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +116,7 @@
 				TargetAttributes = {
 					0BD8C1B124D62D0700277296 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -124,6 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD8C1BB24D62F1800277296 /* AddAccountUseCase.swift in Sources */,
+				0BD8C1C024D6341600277296 /* AccountModel.swift in Sources */,
+				0BD8C1BE24D633EC00277296 /* AddAccountModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +285,7 @@
 		0BD8C1B824D62D0700277296 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -272,6 +305,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -279,6 +313,7 @@
 		0BD8C1B924D62D0700277296 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
