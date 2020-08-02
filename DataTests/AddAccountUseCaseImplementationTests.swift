@@ -34,8 +34,8 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
 
     func test_add_should_call_httpClient_with_correct_url() {
         
-        let url = URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")
-        let accountModel = AddAccountModel(name: "name", email: "email", password: "password", passwordConfirmation: "password")
+        let url = URL(string: "https://docs.github.com/en/github")
+        let accountModel = createAddAccount()
         let httpClient = HttpClientSpy()
         let sut = AddAccountUseCaseImplementationMock(url: url!, httpClient: httpClient)
         sut.add(addAccountModel: accountModel)
@@ -45,14 +45,30 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
     
     func test_add_should_call_httpClient_with_correct_data() {
         
-        let url = URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")
-        let accountModel = AddAccountModel(name: "name", email: "email", password: "password", passwordConfirmation: "password")
+        let accountModel = createAddAccount()
         let httpClient = HttpClientSpy()
-        let sut = AddAccountUseCaseImplementationMock(url: url!, httpClient: httpClient)
+        let sut = createSUT(with: httpClient)
         sut.add(addAccountModel: accountModel)
         let data = try? JSONEncoder().encode(accountModel)
         XCTAssertEqual(httpClient.data, data)
         
+    }
+
+}
+
+extension AddAccountUseCaseImplementationTests {
+    
+    func createAddAccount() -> AddAccountModel {
+        AddAccountModel(name: "name", email: "email", password: "password", passwordConfirmation: "password")
+    }
+    
+    func createSUT(with httpClient: HttpClientSpy) -> AddAccountUseCaseImplementationMock {
+        let sut = AddAccountUseCaseImplementationMock(url: createUrl(), httpClient: httpClient)
+        return sut
+    }
+    
+    func createUrl() -> URL {
+        URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")!
     }
     
     class HttpClientSpy: HttpClient {
@@ -64,7 +80,7 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         }
         
     }
-
+    
 }
 
 
