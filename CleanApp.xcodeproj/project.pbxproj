@@ -14,6 +14,10 @@
 		0BD8C1D524D634DB00277296 /* AddAccountUseCaseImplementationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1D424D634DB00277296 /* AddAccountUseCaseImplementationTests.swift */; };
 		0BD8C1DF24D6351C00277296 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD8C1B224D62D0700277296 /* Domain.framework */; };
 		0BD8C1E024D6351C00277296 /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD8C1B224D62D0700277296 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0BD8C1E524D7841600277296 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1E424D7841600277296 /* EncodableExtension.swift */; };
+		0BD8C1E724D7857B00277296 /* AddAccountUseCaseImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1E624D7857B00277296 /* AddAccountUseCaseImplementation.swift */; };
+		0BD8C1EA24D785F700277296 /* HttpPostClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1E924D785F700277296 /* HttpPostClient.swift */; };
+		0BD8C1EC24D786F300277296 /* HttpClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,10 @@
 		0BD8C1CF24D634DB00277296 /* DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD8C1D424D634DB00277296 /* AddAccountUseCaseImplementationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountUseCaseImplementationTests.swift; sourceTree = "<group>"; };
 		0BD8C1D624D634DB00277296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BD8C1E424D7841600277296 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
+		0BD8C1E624D7857B00277296 /* AddAccountUseCaseImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountUseCaseImplementation.swift; sourceTree = "<group>"; };
+		0BD8C1E924D785F700277296 /* HttpPostClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpPostClient.swift; sourceTree = "<group>"; };
+		0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,7 @@
 				0BD8C1C124D6342700277296 /* Model */,
 				0BD8C1BC24D633C400277296 /* AddAccountUseCase */,
 				0BD8C1B524D62D0700277296 /* Info.plist */,
+				0BD8C1E424D7841600277296 /* EncodableExtension.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -139,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				0BD8C1CA24D634DB00277296 /* Info.plist */,
+				0BD8C1E624D7857B00277296 /* AddAccountUseCaseImplementation.swift */,
+				0BD8C1E924D785F700277296 /* HttpPostClient.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 			children = (
 				0BD8C1D424D634DB00277296 /* AddAccountUseCaseImplementationTests.swift */,
 				0BD8C1D624D634DB00277296 /* Info.plist */,
+				0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */,
 			);
 			path = DataTests;
 			sourceTree = "<group>";
@@ -251,6 +263,7 @@
 					};
 					0BD8C1C624D634DB00277296 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 					0BD8C1CE24D634DB00277296 = {
 						CreatedOnToolsVersion = 11.5;
@@ -309,6 +322,7 @@
 				0BD8C1BB24D62F1800277296 /* AddAccountUseCase.swift in Sources */,
 				0BD8C1C024D6341600277296 /* AccountModel.swift in Sources */,
 				0BD8C1BE24D633EC00277296 /* AddAccountModel.swift in Sources */,
+				0BD8C1E524D7841600277296 /* EncodableExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +330,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD8C1EA24D785F700277296 /* HttpPostClient.swift in Sources */,
+				0BD8C1E724D7857B00277296 /* AddAccountUseCaseImplementation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD8C1D524D634DB00277296 /* AddAccountUseCaseImplementationTests.swift in Sources */,
+				0BD8C1EC24D786F300277296 /* HttpClientSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +538,7 @@
 		0BD8C1D924D634DB00277296 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -540,6 +558,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -547,6 +566,7 @@
 		0BD8C1DA24D634DB00277296 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -573,6 +593,7 @@
 		0BD8C1DC24D634DB00277296 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C434CHPZ37;
@@ -593,6 +614,7 @@
 		0BD8C1DD24D634DB00277296 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C434CHPZ37;
