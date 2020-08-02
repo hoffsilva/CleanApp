@@ -13,4 +13,16 @@ public struct AccountModel {
     public let name: String
     public let email: String
     public let password: String
+    
+    init(
+        identifier: String,
+        name: String,
+        email: String,
+        password: String
+    ) {
+        self.identifier = identifier
+        self.name = name
+        self.email = email
+        self.password = password
+    }
 }
