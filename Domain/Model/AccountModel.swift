@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct AccountModel {
-    let identifier: String
-    let name: String
-    let email: String
-    let password: String
+public struct AccountModel {
+    public let identifier: String
+    public let name: String
+    public let email: String
+    public let password: String
 }

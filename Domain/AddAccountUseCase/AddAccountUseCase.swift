@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AddAccountUseCase {
+public protocol AddAccountUseCase {
     func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel, Error>) -> Void)
 }

@@ -20,7 +20,7 @@ class AddAccountUseCaseImplementationMock {
         self.httpClient = httpClient
     }
     
-    func add() {
+    func add(addAccountModel: AddAccountModel) {
         httpClient.post(url: url)
     }
 }
@@ -31,17 +31,28 @@ protocol HttpClient {
 
 class AddAccountUseCaseImplementationTests: XCTestCase {
 
-    func test_() throws {
+    func test_add_should_call_httpClient_with_correct_url() {
         
         let url = URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")
-        let httpClient = HttpClientMock()
+        let httpClient = HttpClientSpy()
         let sut = AddAccountUseCaseImplementationMock(url: url!, httpClient: httpClient)
         sut.add()
         XCTAssertEqual(httpClient.url, url)
         
     }
     
-    class HttpClientMock: HttpClient {
+    func test_add_should_call_httpClient_with_correct_data() {
+        
+        let url = URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")
+//        let data =
+        let httpClient = HttpClientSpy()
+        let sut = AddAccountUseCaseImplementationMock(url: url!, httpClient: httpClient)
+        sut.add()
+        XCTAssertEqual(httpClient.data, data)
+        
+    }
+    
+    class HttpClientSpy: HttpClient {
         var url: URL?
         func post(url: URL) {
             self.url = url
