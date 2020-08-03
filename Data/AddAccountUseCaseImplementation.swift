@@ -20,9 +20,9 @@ public final class AddAccountUseCaseImplementation {
         self.httpClient = httpClient
     }
     
-    public func add(addAccountModel: AddAccountModel, completion: @escaping (DomainError)->Void) {
+    public func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel,DomainError>)->Void) {
         httpClient.post(to: url, with: addAccountModel.toData()) { error in
-            completion(.unexpected)
+            completion(.failure(.unexpected))
         }
     }
 }

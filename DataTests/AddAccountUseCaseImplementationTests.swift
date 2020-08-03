@@ -41,8 +41,12 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         let httpClient = HttpClientSpy()
         let sut = createSUT(with: httpClient)
         let expec = expectation(description: "wait")
-        sut.add(addAccountModel: accountModel) { error in
-            XCTAssertEqual(error, DomainError.unexpected)
+        sut.add(addAccountModel: accountModel) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error, DomainError.unexpected)
+            case .success: XCTFail("Expected error and got a success!")
+            }
             expec.fulfill()
         }
         httpClient.completionWithError(.noConnectivity)

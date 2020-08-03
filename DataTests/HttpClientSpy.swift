@@ -12,16 +12,16 @@ import Data
 class HttpClientSpy: HttpPostClient {
     var urls = [URL]()
     var data: Data?
-    var completion: ((HttpClientError) -> Void)?
+    var completion: ((Result<Data,HttpClientError>) -> Void)?
     
-    func post(to url: URL, with data: Data?, completion: @escaping (HttpClientError)->Void) {
+    func post(to url: URL, with data: Data?, completion: @escaping (Result<Data,HttpClientError>)->Void) {
         self.urls.append(url)
         self.data = data
         self.completion = completion
     }
     
     func completionWithError(_ error: HttpClientError) {
-        completion?(error)
+        completion?(.failure(error))
     }
     
 }
