@@ -10,11 +10,18 @@ import Foundation
 import Data
 
 class HttpClientSpy: HttpPostClient {
-    var url: URL?
+    var urls = [URL]()
     var data: Data?
-    func post(to url: URL, with data: Data?) {
-        self.url = url
+    var completion: ((HttpClientError) -> Void)?
+    
+    func post(to url: URL, with data: Data?, completion: @escaping (HttpClientError)->Void) {
+        self.urls.append(url)
         self.data = data
+        self.completion = completion
+    }
+    
+    func completionWithError(_ error: HttpClientError) {
+        completion?(error)
     }
     
 }

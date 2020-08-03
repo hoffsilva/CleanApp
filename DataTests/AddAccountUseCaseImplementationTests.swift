@@ -19,8 +19,8 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         let accountModel = createAddAccount()
         let httpClient = HttpClientSpy()
         let sut = AddAccountUseCaseImplementation(url: url!, httpClient: httpClient)
-        sut.add(addAccountModel: accountModel)
-        XCTAssertEqual(httpClient.url, url)
+        sut.add(addAccountModel: accountModel) { _ in }
+        XCTAssertEqual(httpClient.urls, [url])
         
     }
     
@@ -29,12 +29,26 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         let accountModel = createAddAccount()
         let httpClient = HttpClientSpy()
         let sut = createSUT(with: httpClient)
-        sut.add(addAccountModel: accountModel)
+        sut.add(addAccountModel: accountModel) { _ in }
         let data = accountModel.toData()
         XCTAssertEqual(httpClient.data, data)
         
     }
 
+    func test_add_should_complete_with_error_when_client_fails() {
+        
+        let accountModel = createAddAccount()
+        let httpClient = HttpClientSpy()
+        let sut = createSUT(with: httpClient)
+        let expec = expectation(description: "wait")
+        sut.add(addAccountModel: accountModel) { error in
+            XCTAssertEqual(error, DomainError.unexpected)
+            expec.fulfill()
+        }
+        httpClient.completionWithError(.noConnectivity)
+        wait(for: [expec], timeout: 1)
+        
+    }
 }
 
 extension AddAccountUseCaseImplementationTests {
