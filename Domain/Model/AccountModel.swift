@@ -8,13 +8,13 @@
 
 import Foundation
 
-public struct AccountModel {
+public struct AccountModel: Codable, Equatable {
     public let identifier: String
     public let name: String
     public let email: String
     public let password: String
     
-    init(
+    public init(
         identifier: String,
         name: String,
         email: String,

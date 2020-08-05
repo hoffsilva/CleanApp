@@ -21,8 +21,17 @@ public final class AddAccountUseCaseImplementation {
     }
     
     public func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel,DomainError>)->Void) {
-        httpClient.post(to: url, with: addAccountModel.toData()) { error in
-            completion(.failure(.unexpected))
+        httpClient.post(to: url, with: addAccountModel.toData()) { result in
+            switch result {
+            case .failure:
+                completion(.failure(.unexpected))
+            case .success(let data):
+                guard let accountModel: AccountModel = data.toModel() else {
+                    completion(.failure(.parseFailed))
+                    return
+                }
+                completion(.success(accountModel))
+            }
         }
     }
 }

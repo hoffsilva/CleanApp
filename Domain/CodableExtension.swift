@@ -9,9 +9,14 @@
 import Foundation
 
 extension Encodable {
-    
     public func toData() -> Data? {
         try? JSONEncoder().encode(self)
     }
-    
 }
+
+extension Data {
+    public func toModel<Element: Decodable>() -> Element? {
+        try? JSONDecoder().decode(Element.self, from: self)
+    }
+}
+

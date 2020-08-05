@@ -8,6 +8,8 @@
 
 import Foundation
 
-public enum DomainError: Error {
+public enum DomainError: Error, Equatable {
     case unexpected
+    case parseFailed
+    case custom(String)
 }

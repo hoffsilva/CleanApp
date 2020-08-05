@@ -37,20 +37,29 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
 
     func test_add_should_complete_with_error_when_client_fails() {
         
-        let accountModel = createAddAccount()
-        let httpClient = HttpClientSpy()
-        let sut = createSUT(with: httpClient)
-        let expec = expectation(description: "wait")
-        sut.add(addAccountModel: accountModel) { result in
-            switch result {
-            case .failure(let error):
-                XCTAssertEqual(error, DomainError.unexpected)
-            case .success: XCTFail("Expected error and got a success!")
-            }
-            expec.fulfill()
+       let httpClient = HttpClientSpy()
+        expect(createSUT(with: httpClient), completeWith: .failure(.unexpected)) {
+            httpClient.completionWithError(.noConnectivity)
         }
-        httpClient.completionWithError(.noConnectivity)
-        wait(for: [expec], timeout: 1)
+        
+    }
+    
+    func test_add_should_complete_with_account_when_client_returns_valid_data() {
+        
+        let expectedAccount = createAccountModel()
+        let httpClient = HttpClientSpy()
+        expect(createSUT(with: httpClient), completeWith: .success(expectedAccount)) {
+            httpClient.completionWithData(expectedAccount.toData())
+        }
+        
+    }
+    
+    func test_add_should_complete_with_error_when_client_returns_invalid_data() {
+        
+        let httpClient = HttpClientSpy()
+        expect(createSUT(with: httpClient), completeWith: .failure(.parseFailed)) {
+            httpClient.completionWithData(Data())
+        }
         
     }
 }
@@ -68,6 +77,28 @@ extension AddAccountUseCaseImplementationTests {
     
     func createUrl() -> URL {
         URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")!
+    }
+    
+    func createAccountModel() -> AccountModel {
+        AccountModel(identifier: "identifier", name: "name", email: "email", password: "password")
+    }
+    
+    func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: Result<AccountModel, DomainError>, when action: @escaping ()->Void) {
+        let expec = expectation(description: "wait")
+        let addAccountModel = createAddAccount()
+        sut.add(addAccountModel: addAccountModel) { receivedResult in
+            switch (expectedResult, receivedResult) {
+            case (.failure(let expectedError), .failure(let receivedError)):
+                XCTAssertEqual(expectedError, receivedError)
+            case (.success(let expectedSuccess), .success(let receivedSuccess)):
+                XCTAssertEqual(expectedSuccess, receivedSuccess)
+            default:
+                XCTFail("Expected error and got a success!")
+            }
+            expec.fulfill()
+        }
+        action()
+        wait(for: [expec], timeout: 1)
     }
     
 }

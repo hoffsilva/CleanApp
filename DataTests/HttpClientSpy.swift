@@ -20,8 +20,13 @@ class HttpClientSpy: HttpPostClient {
         self.completion = completion
     }
     
-    func completionWithError(_ error: HttpClientError) {
+    public func completionWithError(_ error: HttpClientError) {
         completion?(.failure(error))
+    }
+    
+    public func completionWithData(_ data: Data?) {
+        guard let data = data else { return }
+        completion?(.success(data))
     }
     
 }
