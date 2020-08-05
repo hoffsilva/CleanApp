@@ -38,9 +38,9 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
     func test_add_should_complete_with_error_when_client_fails() {
         
        let httpClient = HttpClientSpy()
-        expect(createSUT(with: httpClient), completeWith: .failure(.unexpected)) {
+        expect(createSUT(with: httpClient), completeWith: .failure(.unexpected), when: {
             httpClient.completionWithError(.noConnectivity)
-        }
+        })
         
     }
     
@@ -48,18 +48,18 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         
         let expectedAccount = createAccountModel()
         let httpClient = HttpClientSpy()
-        expect(createSUT(with: httpClient), completeWith: .success(expectedAccount)) {
+        expect(createSUT(with: httpClient), completeWith: .success(expectedAccount), when: {
             httpClient.completionWithData(expectedAccount.toData())
-        }
+        })
         
     }
     
     func test_add_should_complete_with_error_when_client_returns_invalid_data() {
         
         let httpClient = HttpClientSpy()
-        expect(createSUT(with: httpClient), completeWith: .failure(.parseFailed)) {
+        expect(createSUT(with: httpClient), completeWith: .failure(.parseFailed), when: {
             httpClient.completionWithData(Data())
-        }
+        })
         
     }
 }
@@ -76,24 +76,24 @@ extension AddAccountUseCaseImplementationTests {
     }
     
     func createUrl() -> URL {
-        URL(string: "https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line")!
+        URL(string: "https://docs.github.com")!
     }
     
     func createAccountModel() -> AccountModel {
         AccountModel(identifier: "identifier", name: "name", email: "email", password: "password")
     }
     
-    func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: Result<AccountModel, DomainError>, when action: @escaping ()->Void) {
+    func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: Result<AccountModel, DomainError>, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
         let expec = expectation(description: "wait")
         let addAccountModel = createAddAccount()
         sut.add(addAccountModel: addAccountModel) { receivedResult in
             switch (expectedResult, receivedResult) {
             case (.failure(let expectedError), .failure(let receivedError)):
-                XCTAssertEqual(expectedError, receivedError)
+                XCTAssertEqual(expectedError, receivedError, file: file, line: line)
             case (.success(let expectedSuccess), .success(let receivedSuccess)):
-                XCTAssertEqual(expectedSuccess, receivedSuccess)
+                XCTAssertEqual(expectedSuccess, receivedSuccess, file: file, line: line)
             default:
-                XCTFail("Expected error and got a success!")
+                XCTFail("Expected error and got a success!", file: file, line: line)
             }
             expec.fulfill()
         }
