@@ -20,6 +20,8 @@
 		0BD8C1EC24D786F300277296 /* HttpClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */; };
 		0BD8C1EE24D789D500277296 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1ED24D789D500277296 /* DomainError.swift */; };
 		0BD8C1F024D78D0500277296 /* HttpClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1EF24D78D0500277296 /* HttpClientError.swift */; };
+		0BD8C1F224DCD29300277296 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
+		0BD8C1F424DCD34F00277296 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientSpy.swift; sourceTree = "<group>"; };
 		0BD8C1ED24D789D500277296 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		0BD8C1EF24D78D0500277296 /* HttpClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientError.swift; sourceTree = "<group>"; };
+		0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Utils.swift"; sourceTree = "<group>"; };
+		0BD8C1F324DCD34F00277296 /* TestsTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,8 @@
 				0BD8C1D424D634DB00277296 /* AddAccountUseCaseImplementationTests.swift */,
 				0BD8C1D624D634DB00277296 /* Info.plist */,
 				0BD8C1EB24D786F300277296 /* HttpClientSpy.swift */,
+				0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */,
+				0BD8C1F324DCD34F00277296 /* TestsTools.swift */,
 			);
 			path = DataTests;
 			sourceTree = "<group>";
@@ -349,6 +355,8 @@
 			files = (
 				0BD8C1D524D634DB00277296 /* AddAccountUseCaseImplementationTests.swift in Sources */,
 				0BD8C1EC24D786F300277296 /* HttpClientSpy.swift in Sources */,
+				0BD8C1F224DCD29300277296 /* XCTestCase+Utils.swift in Sources */,
+				0BD8C1F424DCD34F00277296 /* TestsTools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
