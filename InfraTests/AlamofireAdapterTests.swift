@@ -8,6 +8,7 @@
 
 import XCTest
 import Alamofire
+import Combine
 
 class AlamofireAdapter {
     
@@ -17,23 +18,28 @@ class AlamofireAdapter {
         self.session = session
     }
     
-    func post(to url: URL) {
-        session.request(url).resume()
+    func post(to url: URL, with data: Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+        session.request(url, method: .post, parameters: json, encoding: JSONEncoding.default).resume()
     }
 }
 
 class AlamofireAdapterTests: XCTestCase {
 
-    func test_() {
+    func test_post_shoul_make_request_with_valid_url_and_methd() {
         let expect = expectation(description: "waiting")
         let url = TestTools.createUrl()
         let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.protocolClasses = [URLProtocolStub.self]
         let session = Session(configuration: sessionConfiguration)
         let sut = AlamofireAdapter(session: session)
-        sut.post(to: url)
+        let body = TestTools.createAddUserAccountData()
+        sut.post(to: url, with: body)
         URLProtocolStub.requestObserver { request in
             XCTAssertEqual(url, request.url)
+            XCTAssertEqual("POST", request.httpMethod)
+            XCTAssertNotNil(request.httpBodyStream)
+//            XCTAssertEqual(body, request.httpBody)
             expect.fulfill()
         }
         wait(for: [expect], timeout: 0.1 )
@@ -44,6 +50,8 @@ class AlamofireAdapterTests: XCTestCase {
 class URLProtocolStub: URLProtocol {
     
     static var completion: ((URLRequest) -> Void)?
+    
+    @Published var req: URLRequest?
     
     static func requestObserver(completionHandler: @escaping (URLRequest) -> Void) {
         URLProtocolStub.completion = completionHandler

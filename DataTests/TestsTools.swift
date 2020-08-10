@@ -18,4 +18,12 @@ struct TestTools {
     static func createAccountModel() -> AccountModel {
         AccountModel(identifier: "identifier", name: "name", email: "email", password: "password")
     }
-}
+    
+    static func createInvalidData() -> Data {
+        Data()
+    }
+    
+    static func createAddUserAccountData() -> Data {
+        Data("{\"name\":\"Hoff\"}".utf8)
+    }
+ }
