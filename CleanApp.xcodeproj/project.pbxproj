@@ -28,6 +28,7 @@
 		0BD8C21224DCD6EB00277296 /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD8C1C724D634DB00277296 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0BD8C21624DCD71000277296 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		0BD8C21924DCD93D00277296 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD8C21824DCD93D00277296 /* Alamofire */; };
+		0BE4945824E6162500ABA24D /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4945724E6162500ABA24D /* URLProtocolStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		0BD8C20224DCD61A00277296 /* InfraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD8C20724DCD61A00277296 /* AlamofireAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapterTests.swift; sourceTree = "<group>"; };
 		0BD8C20924DCD61A00277296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BE4945724E6162500ABA24D /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 			children = (
 				0BD8C20724DCD61A00277296 /* AlamofireAdapterTests.swift */,
 				0BD8C20924DCD61A00277296 /* Info.plist */,
+				0BE4945724E6162500ABA24D /* URLProtocolStub.swift */,
 			);
 			path = InfraTests;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD8C20824DCD61A00277296 /* AlamofireAdapterTests.swift in Sources */,
+				0BE4945824E6162500ABA24D /* URLProtocolStub.swift in Sources */,
 				0BD8C21624DCD71000277296 /* TestsTools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

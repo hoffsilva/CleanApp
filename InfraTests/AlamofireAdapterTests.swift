@@ -9,6 +9,7 @@
 import XCTest
 import Alamofire
 import Combine
+import Data
 
 class AlamofireAdapter {
     
@@ -18,9 +19,17 @@ class AlamofireAdapter {
         self.session = session
     }
     
-    func post(to url: URL, with data: Data?) {
+    func post(to url: URL, with data: Data?, completion: @escaping (Result<Data, HttpClientError>) -> Void ) {
         if let json = data?.toJSON() {
-            session.request(url, method: .post, parameters: json, encoding: JSONEncoding.default).resume()
+            session
+                .request(url, method: .post, parameters: json, encoding: JSONEncoding.default)
+                .responseData { responseData in
+                    switch responseData.result {
+                    case .failure:
+                        completion(.failure(.noConnectivity))
+                    case .success: break
+                    }
+            }
         } else {
             session.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default).resume()
         }
@@ -28,66 +37,66 @@ class AlamofireAdapter {
 }
 
 class AlamofireAdapterTests: XCTestCase {
-
+    
     func test_post_should_make_request_with_valid_url_and_methd() {
-        let expect = expectation(description: "waiting")
         let url = TestTools.createUrl()
+        performTestFor(url: url, data: TestTools.createAddUserAccountData()) { (request) in
+            XCTAssertEqual(url, request.url)
+            XCTAssertEqual("POST", request.httpMethod)
+            XCTAssertNotNil(request.httpBodyStream)
+        }
+    }
+    
+    func test_post_should_make_request_with_no_data() {
+        performTestFor(data: TestTools.createAddUserAccountData()) { (request) in
+            XCTAssertNotNil(request.httpBodyStream)
+        }
+    }
+    
+    func test_post_should_complete_with_when_request_completes_with_error() {
+        URLProtocolStub.configureResponseProperties(data: nil, response: nil, error: TestTools.createError())
+        performTestFor(expectedResult: .failure(.noConnectivity))
+    }
+    
+}
+
+extension AlamofireAdapterTests {
+    
+    func createSUT(file: StaticString = #file, line: UInt = #line) -> AlamofireAdapter {
         let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.protocolClasses = [URLProtocolStub.self]
         let session = Session(configuration: sessionConfiguration)
         let sut = AlamofireAdapter(session: session)
-        let body = TestTools.createAddUserAccountData()
-        sut.post(to: url, with: body)
-        URLProtocolStub.requestObserver { request in
-            XCTAssertEqual(url, request.url)
-            XCTAssertEqual("POST", request.httpMethod)
-            XCTAssertNotNil(request.httpBodyStream)
-//            XCTAssertEqual(body, request.httpBody)
-            expect.fulfill()
-        }
-        wait(for: [expect], timeout: 0.1 )
+        return sut
     }
     
-     func test_post_should_make_request_with_no_data() {
-            let expect = expectation(description: "waiting")
-            let url = TestTools.createUrl()
-            let sessionConfiguration = URLSessionConfiguration.default
-            sessionConfiguration.protocolClasses = [URLProtocolStub.self]
-            let session = Session(configuration: sessionConfiguration)
-            let sut = AlamofireAdapter(session: session)
-            sut.post(to: url, with: nil)
-            URLProtocolStub.requestObserver { request in
-                XCTAssertNil(request.httpBodyStream)
-                expect.fulfill()
+    func performTestFor(url: URL = TestTools.createUrl(), data: Data?, action: @escaping (URLRequest) -> Void) {
+        let sut = createSUT()
+        let expec = expectation(description: "wait")
+        sut.post(to: url, with: data) { _ in expec.fulfill() }
+        var request: URLRequest?
+        URLProtocolStub.requestObserver { request = $0 }
+        wait(for: [expec], timeout: 0.1)
+        guard let req = request else { return }
+        action(req)
+    }
+    
+    func performTestFor(expectedResult: Result<Data,HttpClientError>, file: StaticString = #file, line: UInt = #line) {
+        let sut = createSUT()
+        let expec = expectation(description: "wait")
+        sut.post(to: TestTools.createUrl(), with: TestTools.createAddUserAccountData()) { receivedResult in
+            switch (expectedResult, receivedResult) {
+            case (.failure(let expectedError), .failure(let receivedError)):
+                XCTAssertEqual(expectedError, receivedError, file: file, line: line)
+            case (.success(let expectedData), .success(let receivedData)):
+                XCTAssertEqual(expectedData, receivedData, file: file, line: line)
+            default:
+                XCTFail("Expected result doesn't equal to received result.", file: file, line: line)
             }
-            wait(for: [expect], timeout: 1 )
+            expec.fulfill()
         }
-
-}
-
-class URLProtocolStub: URLProtocol {
-    
-    static var completion: ((URLRequest) -> Void)?
-    
-    @Published var req: URLRequest?
-    
-    static func requestObserver(completionHandler: @escaping (URLRequest) -> Void) {
-        URLProtocolStub.completion = completionHandler
+        wait(for: [expec], timeout: 0.1)
+        
     }
-    
-    override open class func canInit(with request: URLRequest) -> Bool {
-        true
-    }
-    
-    override open class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        request
-    }
-    
-    override func startLoading() {
-        URLProtocolStub.completion?(request)
-    }
-    
-    override func stopLoading() { }
-    
     
 }

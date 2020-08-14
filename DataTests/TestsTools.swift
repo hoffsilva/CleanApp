@@ -26,4 +26,8 @@ struct TestTools {
     static func createAddUserAccountData() -> Data {
         Data("{\"name\":\"Hoff\"}".utf8)
     }
+    
+    static func createError() -> Error {
+        NSError(domain: "", code: 0)
+    }
  }
