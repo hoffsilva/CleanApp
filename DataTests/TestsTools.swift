@@ -31,7 +31,7 @@ struct TestTools {
         NSError(domain: "", code: 0)
     }
     
-    static func createHTTPResponse() -> HTTPURLResponse? {
-        HTTPURLResponse(url: createUrl(), statusCode: 200, httpVersion: nil, headerFields: nil)
+    static func createHTTPResponse(_ statusCode: Int = 200) -> HTTPURLResponse? {
+        HTTPURLResponse(url: createUrl(), statusCode: statusCode, httpVersion: nil, headerFields: nil)
     }
  }

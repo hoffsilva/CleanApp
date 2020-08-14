@@ -8,33 +8,8 @@
 
 import XCTest
 import Alamofire
-import Combine
 import Data
-
-class AlamofireAdapter {
-    
-    private let session: Session
-    
-    init(session: Session = .default) {
-        self.session = session
-    }
-    
-    func post(to url: URL, with data: Data?, completion: @escaping (Result<Data, HttpClientError>) -> Void ) {
-        if let json = data?.toJSON() {
-            session
-                .request(url, method: .post, parameters: json, encoding: JSONEncoding.default)
-                .responseData { responseData in
-                    switch responseData.result {
-                    case .failure:
-                        completion(.failure(.noConnectivity))
-                    case .success: break
-                    }
-            }
-        } else {
-            session.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default).resume()
-        }
-    }
-}
+import Infra
 
 class AlamofireAdapterTests: XCTestCase {
     
@@ -99,6 +74,55 @@ class AlamofireAdapterTests: XCTestCase {
         performTestFor(expectedResult: .failure(.noConnectivity), data: Data())
     }
     
+    func test_post_should_complete_with_error_when_request_answer_with_no_data_response_and_error() {
+        URLProtocolStub
+            .configureResponseProperties(
+                data: nil,
+                response: TestTools.createHTTPResponse(),
+                error: TestTools.createError()
+        )
+        performTestFor(expectedResult: .failure(.noConnectivity), data: nil)
+    }
+    
+    func test_post_should_complete_with_error_when_request_answer_with_no_data_response_and_no_error() {
+        URLProtocolStub
+            .configureResponseProperties(
+                data: nil,
+                response: TestTools.createHTTPResponse(),
+                error: nil
+        )
+        performTestFor(expectedResult: .failure(.noConnectivity), data: nil)
+    }
+    
+    func test_post_should_complete_with_httpStatusCode_2XX_OK() {
+        let data = TestTools.createAddUserAccountData()
+        URLProtocolStub.configureResponseProperties(
+            data: data,
+            response: TestTools.createHTTPResponse(),
+            error: nil
+        )
+        performTestFor(expectedResult: .success(data), data: data)
+    }
+    
+    func test_post_should_complete_with_httpStatusCode_4XX_OK() {
+        let data = TestTools.createAddUserAccountData()
+        URLProtocolStub.configureResponseProperties(
+            data: data,
+            response: TestTools.createHTTPResponse(400),
+            error: nil
+        )
+        performTestFor(expectedResult: .failure(.fourHundred), data: data)
+    }
+    
+    func test_post_should_complete_with_httpStatusCode_5XX_OK() {
+        let data = TestTools.createAddUserAccountData()
+        URLProtocolStub.configureResponseProperties(
+            data: data,
+            response: TestTools.createHTTPResponse(500),
+            error: nil
+        )
+        performTestFor(expectedResult: .failure(.fiveHundred), data: data)
+    }
     
     
 }
@@ -124,9 +148,9 @@ extension AlamofireAdapterTests {
         action(req)
     }
     
-    func performTestFor(expectedResult: Result<Data,HttpClientError>, data: Data?, file: StaticString = #file, line: UInt = #line) {
+    func performTestFor(expectedResult: Result<Data?,HttpClientError>, data: Data?, file: StaticString = #file, line: UInt = #line) {
         let sut = createSUT()
-        let expec = expectation(description: "wait")
+        let expec = expectation(description: "waiting")
         sut.post(to: TestTools.createUrl(), with: data) { receivedResult in
             switch (expectedResult, receivedResult) {
             case (.failure(let expectedError), .failure(let receivedError)):
@@ -138,7 +162,7 @@ extension AlamofireAdapterTests {
             }
             expec.fulfill()
         }
-        wait(for: [expec], timeout: 1)
+        wait(for: [expec], timeout: 0.1)
         
     }
     

@@ -8,6 +8,9 @@
 
 import Foundation
 
-public enum HttpClientError: Error {
+public enum HttpClientError: Error, Equatable {
     case noConnectivity
+    case fourHundred
+    case threeHundred
+    case fiveHundred
 }
