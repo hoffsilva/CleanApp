@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AddAccountModel: Encodable {
+public struct AddAccountModel: Codable {
     public let name: String
     public let email: String
     public let password: String
@@ -23,6 +23,6 @@ public struct AddAccountModel: Encodable {
         self.name = name
         self.email = email
         self.password = password
-        self.passwordConfirmation = email
+        self.passwordConfirmation = passwordConfirmation
     }
 }

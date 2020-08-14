@@ -15,7 +15,7 @@ public final class AddAccountUseCaseImplementation {
     private let httpClient: HttpPostClient
     
     public init(url: URL,
-         httpClient: HttpPostClient) {
+                httpClient: HttpPostClient) {
         self.url = url
         self.httpClient = httpClient
     }
@@ -27,7 +27,7 @@ public final class AddAccountUseCaseImplementation {
             case .failure:
                 completion(.failure(.unexpected))
             case .success(let data):
-                guard let accountModel: AccountModel = data.toModel() else {
+                guard let accountModel: AccountModel = data?.toModel() else {
                     completion(.failure(.parseFailed))
                     return
                 }

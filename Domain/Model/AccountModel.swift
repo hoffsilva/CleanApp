@@ -9,18 +9,18 @@
 import Foundation
 
 public struct AccountModel: Codable, Equatable {
-    public let identifier: String
+    public let id: String
     public let name: String
     public let email: String
     public let password: String
     
     public init(
-        identifier: String,
+        id: String,
         name: String,
         email: String,
         password: String
     ) {
-        self.identifier = identifier
+        self.id = id
         self.name = name
         self.email = email
         self.password = password
