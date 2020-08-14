@@ -55,8 +55,51 @@ class AlamofireAdapterTests: XCTestCase {
     
     func test_post_should_complete_with_when_request_completes_with_error() {
         URLProtocolStub.configureResponseProperties(data: nil, response: nil, error: TestTools.createError())
-        performTestFor(expectedResult: .failure(.noConnectivity))
+        performTestFor(expectedResult: .failure(.noConnectivity), data: Data())
     }
+    
+    func test_post_should_complete_with_success_when_request_answer_with_data_response_and_no_error() {
+        let data = TestTools.createAddUserAccountData()
+        URLProtocolStub
+            .configureResponseProperties(
+                data: data,
+                response: TestTools.createHTTPResponse(),
+                error: nil
+        )
+        performTestFor(expectedResult: .success(data), data: data)
+    }
+    
+    func test_post_should_complete_with_error_when_request_answer_with_data_response_and_error() {
+        URLProtocolStub
+            .configureResponseProperties(
+                data: Data(),
+                response: TestTools.createHTTPResponse(),
+                error: TestTools.createError()
+        )
+        performTestFor(expectedResult: .failure(.noConnectivity), data: Data())
+    }
+    
+    func test_post_should_complete_with_error_when_request_answer_with_data_no_response_and_no_error() {
+        URLProtocolStub
+            .configureResponseProperties(
+                data: Data(),
+                response: nil,
+                error: nil
+        )
+        performTestFor(expectedResult: .failure(.noConnectivity), data: nil)
+    }
+    
+    func test_post_should_complete_with_error_when_request_answer_with_data_no_response_and_error() {
+        URLProtocolStub
+            .configureResponseProperties(
+                data: Data(),
+                response: nil,
+                error: TestTools.createError()
+        )
+        performTestFor(expectedResult: .failure(.noConnectivity), data: Data())
+    }
+    
+    
     
 }
 
@@ -81,10 +124,10 @@ extension AlamofireAdapterTests {
         action(req)
     }
     
-    func performTestFor(expectedResult: Result<Data,HttpClientError>, file: StaticString = #file, line: UInt = #line) {
+    func performTestFor(expectedResult: Result<Data,HttpClientError>, data: Data?, file: StaticString = #file, line: UInt = #line) {
         let sut = createSUT()
         let expec = expectation(description: "wait")
-        sut.post(to: TestTools.createUrl(), with: TestTools.createAddUserAccountData()) { receivedResult in
+        sut.post(to: TestTools.createUrl(), with: data) { receivedResult in
             switch (expectedResult, receivedResult) {
             case (.failure(let expectedError), .failure(let receivedError)):
                 XCTAssertEqual(expectedError, receivedError, file: file, line: line)
@@ -95,7 +138,7 @@ extension AlamofireAdapterTests {
             }
             expec.fulfill()
         }
-        wait(for: [expec], timeout: 0.1)
+        wait(for: [expec], timeout: 1)
         
     }
     

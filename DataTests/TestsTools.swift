@@ -30,4 +30,8 @@ struct TestTools {
     static func createError() -> Error {
         NSError(domain: "", code: 0)
     }
+    
+    static func createHTTPResponse() -> HTTPURLResponse? {
+        HTTPURLResponse(url: createUrl(), statusCode: 200, httpVersion: nil, headerFields: nil)
+    }
  }
