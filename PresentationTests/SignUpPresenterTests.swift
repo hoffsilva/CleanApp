@@ -7,7 +7,8 @@
 //
 
 import XCTest
-@testable import Presentation
+import Presentation
+import Domain
 
 class SignUpPresenterTests: XCTestCase {
     
@@ -81,6 +82,13 @@ class SignUpPresenterTests: XCTestCase {
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
         XCTAssertEqual(emailValidatorSpy.email, signUpViewModel.email)
+    }
+    
+    func test_signUp_should_call_addAccount_with_correct_values() {
+        let sut = createSUT()
+        let signUpViewModel = createSignUpViewModel()
+        sut.signUp(viewModel: signUpViewModel)
+        XCTAssertEqual(addAccountSpy.addAccountModel)
     }
     
 }
