@@ -16,7 +16,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(name: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "O nome é obrigatório!")
+        let expected = createAlertViewModel(fieldName: "NOME")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -25,7 +25,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(email: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "O email é obrigatório!")
+        let expected = createAlertViewModel(fieldName: "E-MAIL")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -34,7 +34,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(password: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "A senha é obrigatória!")
+        let expected = createAlertViewModel(fieldName: "SENHA")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -43,7 +43,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(passwordConfirmation: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "A confirmação da senha é obrigatória!")
+        let expected = createAlertViewModel(fieldName: "CONFIRMAR SENHA")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -97,6 +97,10 @@ extension SignUpPresenterTests {
     
     func createSignUpViewModel(name: String? = "name", email: String? = "email.com", password: String? = "123", passwordConfirmation: String? = "123") -> SignUpViewModel {
         SignUpViewModel(name: name, email: email, password: password, passwordConfirmation: passwordConfirmation)
+    }
+    
+    func createAlertViewModel(fieldName: String) -> AlertViewModel {
+        AlertViewModel(title: "Campo Inválido", message: "O campo \(fieldName) é obrigatório!")
     }
     
     class AlertViewSpy: AlertView {
