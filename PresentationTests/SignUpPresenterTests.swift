@@ -15,46 +15,68 @@ class SignUpPresenterTests: XCTestCase {
     func test_signUp_should_show_error_message_if_name_is_not_provided() {
         let alertViewSpy = AlertViewSpy()
         let sut = createSUT(alertView: alertViewSpy)
+        let expected = createInvalidFieldAlertViewModel(fieldName: "NOME")
+        let expec = expectation(description: "wait")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            expec.fulfill()
+        }
         let signUpViewModel = createSignUpViewModel(name: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createInvalidFieldAlertViewModel(fieldName: "NOME")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
+        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_show_error_message_if_email_is_not_provided() {
         let alertViewSpy = AlertViewSpy()
         let sut = createSUT(alertView: alertViewSpy)
+        let expected = createInvalidFieldAlertViewModel(fieldName: "E-MAIL")
+        let expec = expectation(description: "wait")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            expec.fulfill()
+        }
         let signUpViewModel = createSignUpViewModel(email: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createInvalidFieldAlertViewModel(fieldName: "E-MAIL")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
+        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_show_error_message_if_password_is_not_provided() {
         let alertViewSpy = AlertViewSpy()
         let sut = createSUT(alertView: alertViewSpy)
+        let expected = createInvalidFieldAlertViewModel(fieldName: "SENHA")
+        let expec = expectation(description: "wait")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            expec.fulfill()
+        }
         let signUpViewModel = createSignUpViewModel(password: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createInvalidFieldAlertViewModel(fieldName: "SENHA")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
+        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_show_error_message_if_passwordConfirmation_is_not_provided() {
         let alertViewSpy = AlertViewSpy()
         let sut = createSUT(alertView: alertViewSpy)
+        let expected = createInvalidFieldAlertViewModel(fieldName: "CONFIRMAR SENHA")
+        let expec = expectation(description: "wait")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            expec.fulfill()
+        }
         let signUpViewModel = createSignUpViewModel(passwordConfirmation: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createInvalidFieldAlertViewModel(fieldName: "CONFIRMAR SENHA")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
+        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_show_error_message_if_passwordConfirmation_is_not_equal_to_password() {
         let alertViewSpy = AlertViewSpy()
         let sut = createSUT(alertView: alertViewSpy)
+        let expected = AlertViewModel(title: "Campo Inválido", message: "A senha a confirmação devem ser iguais!")
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "A senha a confirmação devem ser iguais!")
-        XCTAssertNotEqual(alertViewSpy.viewModel, expected)
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertNotEqual(alertViewModel, expected)
+        }
     }
     
     func test_signUp_should_show_call_emailValidator_with_correct_email() {
@@ -70,10 +92,15 @@ class SignUpPresenterTests: XCTestCase {
         let emailValidatorSpy = EmailValidatorSpy()
         emailValidatorSpy.setEmailAsInvalid()
         let sut = createSUT(alertView: alertViewSpy, emailValidator: emailValidatorSpy)
+        let expected = AlertViewModel(title: "Campo Inválido", message: "Este email não é válido!")
+        let expec = expectation(description: "wait")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            expec.fulfill()
+        }
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
-        let expected = AlertViewModel(title: "Campo Inválido", message: "Este email não é válido!")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
+        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_call_addAccount_with_correct_alues() {
@@ -96,11 +123,13 @@ class SignUpPresenterTests: XCTestCase {
         let alertViewSpy = AlertViewSpy()
         let addAccountSpy = AddAccountSpy()
         let sut = createSUT(alertView: alertViewSpy, addAccount: addAccountSpy)
+        let expected = createInvalidResponseAlertViewModel(message: "deu merda aqui!")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+        }
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
         addAccountSpy.completeWithError(.unexpected)
-        let expected = createInvalidResponseAlertViewModel(message: "deu merda aqui!")
-        XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
 }
@@ -130,10 +159,15 @@ extension SignUpPresenterTests {
     
     class AlertViewSpy: AlertView {
         
-        var viewModel: AlertViewModel?
+        var observableViewModel: ((AlertViewModel) -> Void)?
+        
+        
+        func observeViewModel(viewModel: @escaping (AlertViewModel) -> Void) {
+            self.observableViewModel = viewModel
+        }
         
         func showMessage(viewModel: AlertViewModel) {
-            self.viewModel = viewModel
+            self.observableViewModel?(viewModel)
         }
     }
     
