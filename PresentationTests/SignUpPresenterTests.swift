@@ -17,7 +17,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(name: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createAlertViewModel(fieldName: "NOME")
+        let expected = createInvalidFieldAlertViewModel(fieldName: "NOME")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -26,7 +26,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(email: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createAlertViewModel(fieldName: "E-MAIL")
+        let expected = createInvalidFieldAlertViewModel(fieldName: "E-MAIL")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -35,7 +35,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(password: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createAlertViewModel(fieldName: "SENHA")
+        let expected = createInvalidFieldAlertViewModel(fieldName: "SENHA")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -44,7 +44,7 @@ class SignUpPresenterTests: XCTestCase {
         let sut = createSUT(alertView: alertViewSpy)
         let signUpViewModel = createSignUpViewModel(passwordConfirmation: nil)
         sut.signUp(viewModel: signUpViewModel)
-        let expected = createAlertViewModel(fieldName: "CONFIRMAR SENHA")
+        let expected = createInvalidFieldAlertViewModel(fieldName: "CONFIRMAR SENHA")
         XCTAssertEqual(alertViewSpy.viewModel, expected)
     }
     
@@ -92,6 +92,17 @@ class SignUpPresenterTests: XCTestCase {
         XCTAssertEqual(addAccountSpy.addAccountModel, TestTools.createAddAccount())
     }
     
+    func test_signUp_should_show_error_message_if_addAccount_fails() {
+        let alertViewSpy = AlertViewSpy()
+        let addAccountSpy = AddAccountSpy()
+        let sut = createSUT(alertView: alertViewSpy, addAccount: addAccountSpy)
+        let signUpViewModel = createSignUpViewModel()
+        sut.signUp(viewModel: signUpViewModel)
+        addAccountSpy.completeWithError(.unexpected)
+        let expected = createInvalidResponseAlertViewModel(message: "deu merda aqui!")
+        XCTAssertEqual(alertViewSpy.viewModel, expected)
+    }
+    
 }
 
 extension SignUpPresenterTests {
@@ -109,8 +120,12 @@ extension SignUpPresenterTests {
         SignUpViewModel(name: name, email: email, password: password, passwordConfirmation: passwordConfirmation)
     }
     
-    func createAlertViewModel(fieldName: String) -> AlertViewModel {
+    func createInvalidFieldAlertViewModel(fieldName: String) -> AlertViewModel {
         AlertViewModel(title: "Campo Inválido", message: "O campo \(fieldName) é obrigatório!")
+    }
+    
+    func createInvalidResponseAlertViewModel(message: String) -> AlertViewModel {
+        AlertViewModel(title: "Erro", message: message)
     }
     
     class AlertViewSpy: AlertView {
@@ -139,9 +154,15 @@ extension SignUpPresenterTests {
     class AddAccountSpy: AddAccountUseCase {
         
         var addAccountModel: AddAccountModel?
+        var completion: ((Result<AccountModel, DomainError>) -> Void)?
         
         func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel, DomainError>) -> Void) {
             self.addAccountModel = addAccountModel
+            self.completion = completion
+        }
+        
+        func completeWithError(_ error: DomainError) {
+            completion?(.failure(error))
         }
     }
     

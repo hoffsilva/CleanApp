@@ -37,7 +37,13 @@ public final class SignUpPresenter {
                 password: password,
                 passwordConfirmation: passwordConfirmation
             )
-            addAccount.add(addAccountModel: addAccountModel, completion: { _ in })
+            addAccount.add(addAccountModel: addAccountModel, completion: { response in
+                switch response {
+                case .failure:
+                    self.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: "deu merda aqui!"))
+                case .success: break
+                }
+            })
         }
     }
     
