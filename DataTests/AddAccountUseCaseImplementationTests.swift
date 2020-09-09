@@ -16,7 +16,7 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
     func test_add_should_call_httpClient_with_correct_url() {
         
         let url = URL(string: "https://docs.github.com/en/github")
-        let accountModel = createAddAccount()
+        let accountModel = TestTools.createAddAccount()
         let httpClient = HttpClientSpy()
         let sut = AddAccountUseCaseImplementation(url: url!, httpClient: httpClient)
         sut.add(addAccountModel: accountModel) { _ in }
@@ -26,7 +26,7 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
     
     func test_add_should_call_httpClient_with_correct_data() {
         
-        let accountModel = createAddAccount()
+        let accountModel = TestTools.createAddAccount()
         let httpClient = HttpClientSpy()
         let sut = createSUT(with: httpClient)
         sut.add(addAccountModel: accountModel) { _ in }
@@ -68,7 +68,7 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         let httpClient = HttpClientSpy()
         var sut : AddAccountUseCaseImplementation? = createSUT(with: httpClient)
         var result: Result<AccountModel,DomainError>?
-        sut?.add(addAccountModel: createAddAccount(), completion: { result = $0 })
+        sut?.add(addAccountModel: TestTools.createAddAccount(), completion: { result = $0 })
         sut = nil
         httpClient.completionWithError(.noConnectivity)
         XCTAssertNil(result)
@@ -80,10 +80,6 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
 
 extension AddAccountUseCaseImplementationTests {
     
-    func createAddAccount() -> AddAccountModel {
-        AddAccountModel(name: "name", email: "email", password: "password", passwordConfirmation: "password")
-    }
-    
     func createSUT(with httpClient: HttpClientSpy, file: StaticString = #file, line: UInt = #line) -> AddAccountUseCaseImplementation {
         let sut = AddAccountUseCaseImplementation(url: TestTools.createUrl(), httpClient: httpClient)
         checkMemomryLeak(for: sut, file: file, line: line)
@@ -92,7 +88,7 @@ extension AddAccountUseCaseImplementationTests {
     
     func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: Result<AccountModel, DomainError>, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
         let expec = expectation(description: "wait")
-        let addAccountModel = createAddAccount()
+        let addAccountModel = TestTools.createAddAccount()
         sut.add(addAccountModel: addAccountModel) { receivedResult in
             switch (expectedResult, receivedResult) {
             case (.failure(let expectedError), .failure(let receivedError)):

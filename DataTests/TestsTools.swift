@@ -9,14 +9,18 @@
 import Foundation
 import Domain
 
-struct TestTools {
+public struct TestTools {
     
     static func createUrl() -> URL {
         URL(string: "https://docs.github.com")!
     }
     
     static func createAccountModel() -> AccountModel {
-        AccountModel(identifier: "identifier", name: "name", email: "email", password: "password")
+        AccountModel(id: "identifier", name: "name", email: "email", password: "password")
+    }
+    
+    static func createAddAccount() -> AddAccountModel {
+        AddAccountModel(name: "name", email: "email.com", password: "123", passwordConfirmation: "123")
     }
     
     static func createInvalidData() -> Data {

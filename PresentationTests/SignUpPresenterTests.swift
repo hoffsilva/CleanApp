@@ -85,10 +85,11 @@ class SignUpPresenterTests: XCTestCase {
     }
     
     func test_signUp_should_call_addAccount_with_correct_values() {
-        let sut = createSUT()
+        let addAccountSpy = AddAccountSpy()
+        let sut = createSUT(addAccount: addAccountSpy)
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
-        XCTAssertEqual(addAccountSpy.addAccountModel)
+        XCTAssertEqual(addAccountSpy.addAccountModel, TestTools.createAddAccount())
     }
     
 }
@@ -97,9 +98,10 @@ extension SignUpPresenterTests {
     
     func createSUT(
         alertView: AlertView = AlertViewSpy(),
-        emailValidator: EmailValidator = EmailValidatorSpy()
+        emailValidator: EmailValidator = EmailValidatorSpy(),
+        addAccount: AddAccountSpy = AddAccountSpy()
     ) -> SignUpPresenter {
-        let sut = SignUpPresenter(alertView: alertView, emailValidator: emailValidator)
+        let sut = SignUpPresenter(alertView: alertView, emailValidator: emailValidator, addAccount: addAccount)
         return sut
     }
     
@@ -132,6 +134,15 @@ extension SignUpPresenterTests {
             self.isValid = false
         }
         
+    }
+    
+    class AddAccountSpy: AddAccountUseCase {
+        
+        var addAccountModel: AddAccountModel?
+        
+        func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel, DomainError>) -> Void) {
+            self.addAccountModel = addAccountModel
+        }
     }
     
 }

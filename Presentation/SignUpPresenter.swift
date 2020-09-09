@@ -7,21 +7,37 @@
 //
 
 import Foundation
+import Domain
 
 public final class SignUpPresenter {
     
     private let alertView: AlertView
     private let emailValidator: EmailValidator
+    private let addAccount: AddAccountUseCase
     
     public init(alertView: AlertView,
-                emailValidator: EmailValidator) {
+                emailValidator: EmailValidator,
+                addAccount: AddAccountUseCase) {
         self.alertView = alertView
         self.emailValidator = emailValidator
+        self.addAccount = addAccount
     }
     
     public func signUp(viewModel: SignUpViewModel) {
         if let message = validateField(viewModel: viewModel) {
             alertView.showMessage(viewModel: AlertViewModel(title: "Campo Inválido", message: message))
+        } else {
+            guard let name = viewModel.name,
+                let email = viewModel.email,
+                let password = viewModel.password,
+                let passwordConfirmation = viewModel.passwordConfirmation else { return }
+            let addAccountModel = AddAccountModel(
+                name: name,
+                email: email,
+                password: password,
+                passwordConfirmation: passwordConfirmation
+            )
+            addAccount.add(addAccountModel: addAccountModel, completion: { _ in })
         }
     }
     
