@@ -14,13 +14,16 @@ public final class SignUpPresenter {
     private let alertView: AlertView
     private let emailValidator: EmailValidator
     private let addAccount: AddAccountUseCase
+    private let loadingView: LoadingView
     
     public init(alertView: AlertView,
                 emailValidator: EmailValidator,
-                addAccount: AddAccountUseCase) {
+                addAccount: AddAccountUseCase,
+                loadingView: LoadingView) {
         self.alertView = alertView
         self.emailValidator = emailValidator
         self.addAccount = addAccount
+        self.loadingView = loadingView
     }
     
     public func signUp(viewModel: SignUpViewModel) {
@@ -37,11 +40,13 @@ public final class SignUpPresenter {
                 password: password,
                 passwordConfirmation: passwordConfirmation
             )
-            addAccount.add(addAccountModel: addAccountModel, completion: { response in
+            self.loadingView.show()
+            addAccount.add(addAccountModel: addAccountModel, completion: { [unowned self] response in
                 switch response {
                 case .failure:
                     self.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: "deu merda aqui!"))
-                case .success: break
+                case .success:
+                    self.loadingView.hide()
                 }
             })
         }

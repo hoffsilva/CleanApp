@@ -132,6 +132,18 @@ class SignUpPresenterTests: XCTestCase {
         addAccountSpy.completeWithError(.unexpected)
     }
     
+    func test_signUp_should_show_loadingView_while_addAccount_is_processing() {
+        let loadingView = LoadingViewSpy()
+        let sut = createSUT(loadingView: loadingView)
+        sut.signUp(viewModel: createSignUpViewModel())
+//        let expec = expectation(description: "loadingView")
+        loadingView.observeLoadingState { (state) in
+            XCTAssertTrue(state)
+//            expec.fulfill()
+        }
+//        wait(for: [expec], timeout: 1)
+    }
+    
 }
 
 extension SignUpPresenterTests {
@@ -139,9 +151,13 @@ extension SignUpPresenterTests {
     func createSUT(
         alertView: AlertView = AlertViewSpy(),
         emailValidator: EmailValidator = EmailValidatorSpy(),
-        addAccount: AddAccountSpy = AddAccountSpy()
+        addAccount: AddAccountSpy = AddAccountSpy(),
+        loadingView: LoadingView = LoadingViewSpy(),
+        file: StaticString = #file,
+        line: UInt = #line
     ) -> SignUpPresenter {
-        let sut = SignUpPresenter(alertView: alertView, emailValidator: emailValidator, addAccount: addAccount)
+        let sut = SignUpPresenter(alertView: alertView, emailValidator: emailValidator, addAccount: addAccount, loadingView: loadingView)
+        checkMemomryLeak(for: sut, file: file, line: line)
         return sut
     }
     
@@ -160,7 +176,6 @@ extension SignUpPresenterTests {
     class AlertViewSpy: AlertView {
         
         var observableViewModel: ((AlertViewModel) -> Void)?
-        
         
         func observeViewModel(viewModel: @escaping (AlertViewModel) -> Void) {
             self.observableViewModel = viewModel
@@ -197,6 +212,23 @@ extension SignUpPresenterTests {
         
         func completeWithError(_ error: DomainError) {
             completion?(.failure(error))
+        }
+    }
+    
+    class LoadingViewSpy: LoadingView {
+        
+        var observableLoadingState: ((Bool) -> Void)?
+        
+        func observeLoadingState(loadingState: @escaping (Bool) -> Void) {
+            self.observableLoadingState = loadingState
+        }
+        
+        func show() {
+            self.observableLoadingState?(true)
+        }
+        
+        func hide() {
+            self.observableLoadingState?(false)
         }
     }
     
