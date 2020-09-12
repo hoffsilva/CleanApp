@@ -41,13 +41,13 @@ public final class SignUpPresenter {
                 passwordConfirmation: passwordConfirmation
             )
             self.loadingView.show()
-            addAccount.add(addAccountModel: addAccountModel, completion: { [unowned self] response in
+            addAccount.add(addAccountModel: addAccountModel, completion: { [weak self] response in
                 switch response {
                 case .failure:
-                    self.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: "deu merda aqui!"))
-                case .success:
-                    self.loadingView.hide()
+                    self?.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: "deu merda aqui!"))
+                case .success: break
                 }
+                self?.loadingView.hide()
             })
         }
     }
