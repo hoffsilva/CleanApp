@@ -140,12 +140,9 @@ class SignUpPresenterTests: XCTestCase {
         let loadingView = LoadingViewSpy()
         let sut = createSUT(loadingView: loadingView)
         sut.signUp(viewModel: createSignUpViewModel())
-        setUpExpectation()
-        loadingView.observeLoadingState { [weak self] (state) in
+        loadingView.observeLoadingState { (state) in
             XCTAssertTrue(state)
-            self?.expec.fulfill()
         }
-        wait(for: [expec], timeout: 1)
     }
     
     func test_signUp_should_hide_loadingView_when_addAccount_was_processed() {

@@ -30,16 +30,7 @@ public final class SignUpPresenter {
         if let message = validateField(viewModel: viewModel) {
             alertView.showMessage(viewModel: AlertViewModel(title: "Campo Inválido", message: message))
         } else {
-            guard let name = viewModel.name,
-                let email = viewModel.email,
-                let password = viewModel.password,
-                let passwordConfirmation = viewModel.passwordConfirmation else { return }
-            let addAccountModel = AddAccountModel(
-                name: name,
-                email: email,
-                password: password,
-                passwordConfirmation: passwordConfirmation
-            )
+            guard let addAccountModel = viewModel.asAddAccountModel() else { return }
             self.loadingView.show()
             addAccount.add(addAccountModel: addAccountModel, completion: { [weak self] response in
                 switch response {
