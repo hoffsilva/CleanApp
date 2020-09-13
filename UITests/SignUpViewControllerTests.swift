@@ -8,11 +8,21 @@
 
 import XCTest
 import Presentation
+@testable import UI
 
 class SignUpViewControllerTests: XCTestCase {
 
-    func test_() {
+    func test_loading_is_hidden_on_start() {
+        let sut = createSUT()
         
     }
 
+}
+
+extension SignUpViewControllerTests {
+    
+    func createSUT() -> SignUpViewController {
+        SignUpViewController()
+    }
+    
 }

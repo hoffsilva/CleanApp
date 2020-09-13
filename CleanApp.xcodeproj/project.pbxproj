@@ -29,6 +29,7 @@
 		0BD8C21624DCD71000277296 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		0BD8C21924DCD93D00277296 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD8C21824DCD93D00277296 /* Alamofire */; };
 		0BE4945824E6162500ABA24D /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4945724E6162500ABA24D /* URLProtocolStub.swift */; };
+		CA52692C250D9A9300C0D6CA /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */; };
 		CA5A856024E71F55009524D4 /* AlamofireAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A855F24E71F55009524D4 /* AlamofireAdapter.swift */; };
 		CA5A856824E7279A009524D4 /* AddAccountIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A856724E7279A009524D4 /* AddAccountIntegrationTests.swift */; };
 		CA5A856A24E7279A009524D4 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD8C1C724D634DB00277296 /* Data.framework */; };
@@ -47,6 +48,9 @@
 		CA95197C250D888D004C51FB /* SignUpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA95197B250D888D004C51FB /* SignUpViewControllerTests.swift */; };
 		CA95198A250D8B26004C51FB /* Presentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA870BE224F52B240064266E /* Presentation.framework */; };
 		CA95198B250D8B26004C51FB /* Presentation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CA870BE224F52B240064266E /* Presentation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CA951990250D8D6E004C51FB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA95198F250D8D6E004C51FB /* SignUpViewController.swift */; };
+		CA951993250D8F49004C51FB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951992250D8F49004C51FB /* SignUpView.swift */; };
+		CA951995250D8FD5004C51FB /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951994250D8FD5004C51FB /* ConfigurableView.swift */; };
 		CAF119A12508FB1600C6E860 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		CAF119A3250A51DA00C6E860 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
 		CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF119A4250BA03C00C6E860 /* LoadingView.swift */; };
@@ -212,6 +216,7 @@
 		0BD8C20724DCD61A00277296 /* AlamofireAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapterTests.swift; sourceTree = "<group>"; };
 		0BD8C20924DCD61A00277296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BE4945724E6162500ABA24D /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		CA5A855F24E71F55009524D4 /* AlamofireAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapter.swift; sourceTree = "<group>"; };
 		CA5A856524E7279A009524D4 /* UseCasesIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UseCasesIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A856724E7279A009524D4 /* AddAccountIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountIntegrationTests.swift; sourceTree = "<group>"; };
@@ -231,6 +236,9 @@
 		CA951976250D888D004C51FB /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA95197B250D888D004C51FB /* SignUpViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerTests.swift; sourceTree = "<group>"; };
 		CA95197D250D888D004C51FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA95198F250D8D6E004C51FB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CA951992250D8F49004C51FB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CA951994250D8FD5004C51FB /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
 		CAF119A4250BA03C00C6E860 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -490,7 +498,10 @@
 		CA95196F250D888D004C51FB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CA951991250D8F28004C51FB /* SignUp */,
 				CA951971250D888D004C51FB /* Info.plist */,
+				CA951994250D8FD5004C51FB /* ConfigurableView.swift */,
+				CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -502,6 +513,15 @@
 				CA95197D250D888D004C51FB /* Info.plist */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		CA951991250D8F28004C51FB /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				CA95198F250D8D6E004C51FB /* SignUpViewController.swift */,
+				CA951992250D8F49004C51FB /* SignUpView.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		CAF119A6250BA17C00C6E860 /* Views */ = {
@@ -788,6 +808,7 @@
 					};
 					CA95196D250D888D004C51FB = {
 						CreatedOnToolsVersion = 11.7;
+						LastSwiftMigration = 1170;
 					};
 					CA951975250D888D004C51FB = {
 						CreatedOnToolsVersion = 11.7;
@@ -984,6 +1005,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA951995250D8FD5004C51FB /* ConfigurableView.swift in Sources */,
+				CA951993250D8F49004C51FB /* SignUpView.swift in Sources */,
+				CA52692C250D9A9300C0D6CA /* UIView+Utils.swift in Sources */,
+				CA951990250D8D6E004C51FB /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1621,7 @@
 		CA951980250D888E004C51FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1616,6 +1642,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1623,6 +1650,7 @@
 		CA951981250D888E004C51FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1650,6 +1678,7 @@
 		CA951983250D888E004C51FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C434CHPZ37;
@@ -1671,6 +1700,7 @@
 		CA951984250D888E004C51FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C434CHPZ37;
