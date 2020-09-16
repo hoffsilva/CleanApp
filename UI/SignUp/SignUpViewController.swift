@@ -7,7 +7,37 @@
 //
 
 import Foundation
+import UIKit
 
-class SignUpViewController {
+class SignUpViewController: UIViewController {
+    
+    let signUpView: SignUpView
+    
+    init(signUpView: SignUpView) {
+        self.signUpView = signUpView
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func loadView() {
+//        configureAsRootView(signUpView)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    func configureAsRootView(_ view: UIView) {
+        self.view.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    }
     
 }

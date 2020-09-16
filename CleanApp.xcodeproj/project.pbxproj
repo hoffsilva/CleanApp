@@ -51,6 +51,7 @@
 		CA951990250D8D6E004C51FB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA95198F250D8D6E004C51FB /* SignUpViewController.swift */; };
 		CA951993250D8F49004C51FB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951992250D8F49004C51FB /* SignUpView.swift */; };
 		CA951995250D8FD5004C51FB /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951994250D8FD5004C51FB /* ConfigurableView.swift */; };
+		CACC296E25119FB1008FC0E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC296D25119FB1008FC0E2 /* AppDelegate.swift */; };
 		CAF119A12508FB1600C6E860 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		CAF119A3250A51DA00C6E860 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
 		CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF119A4250BA03C00C6E860 /* LoadingView.swift */; };
@@ -239,6 +240,7 @@
 		CA95198F250D8D6E004C51FB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CA951992250D8F49004C51FB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CA951994250D8FD5004C51FB /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		CACC296D25119FB1008FC0E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAF119A4250BA03C00C6E860 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -502,6 +504,7 @@
 				CA951971250D888D004C51FB /* Info.plist */,
 				CA951994250D8FD5004C51FB /* ConfigurableView.swift */,
 				CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */,
+				CACC296D25119FB1008FC0E2 /* AppDelegate.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 			files = (
 				CA951995250D8FD5004C51FB /* ConfigurableView.swift in Sources */,
 				CA951993250D8F49004C51FB /* SignUpView.swift in Sources */,
+				CACC296E25119FB1008FC0E2 /* AppDelegate.swift in Sources */,
 				CA52692C250D9A9300C0D6CA /* UIView+Utils.swift in Sources */,
 				CA951990250D8D6E004C51FB /* SignUpViewController.swift in Sources */,
 			);
@@ -1210,7 +1214,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1228,6 +1232,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.clean.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
@@ -1240,7 +1245,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1258,6 +1263,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.clean.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
@@ -1269,7 +1275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1287,6 +1293,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.clean.Data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
@@ -1299,7 +1306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1317,6 +1324,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = app.clean.Data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";

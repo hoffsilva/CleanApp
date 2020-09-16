@@ -7,20 +7,22 @@
 //
 
 import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 class SignUpView: UIView {
     
     var activityIndicator: UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.prepareForConstraints()
+        activityIndicator.style = .large
         return activityIndicator
     }
     
     init() {
         super.init(frame: CGRect.zero)
         self.configureObjects()
-        self.prepareForConstraints()
         self.backgroundColor = .brown
     }
     
@@ -37,7 +39,12 @@ extension SignUpView: ConfigurableView {
     }
     
     func configureConstraints() {
-        
+        let constraintY = self.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        constraintY.isActive = true
+        let constraintX = self.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        constraintX.isActive = true
+        activityIndicator.addConstraint(constraintY)
+        activityIndicator.addConstraint(constraintX)
     }
     
 }
