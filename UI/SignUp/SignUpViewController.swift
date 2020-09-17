@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Presentation
 
 class SignUpViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class SignUpViewController: UIViewController {
     }
     
     override func loadView() {
-//        configureAsRootView(signUpView)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -28,7 +29,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        configureAsRootView(signUpView)
     }
     
     func configureAsRootView(_ view: UIView) {
@@ -39,5 +40,21 @@ class SignUpViewController: UIViewController {
         view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     }
+    
+}
+
+extension SignUpViewController: LoadingView {
+    func show() {
+        self.signUpView.activityIndicator.isHidden = false
+        self.signUpView.activityIndicator.startAnimating()
+    }
+    
+    func hide() {
+        self.signUpView.activityIndicator.isHidden = true
+        self.signUpView.activityIndicator.stopAnimating()
+    }
+    
+    
+    
     
 }

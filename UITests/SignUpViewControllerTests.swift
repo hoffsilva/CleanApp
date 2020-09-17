@@ -15,7 +15,7 @@ class SignUpViewControllerTests: XCTestCase {
     func test_loading_is_hidden_on_start() {
         let sut = createSUT()
         sut.loadViewIfNeeded()
-        XCTAssertFalse(sut.signUpView.activityIndicator.isAnimating)
+        XCTAssertTrue(sut.signUpView.activityIndicator.isHidden)
     }
 
 }
