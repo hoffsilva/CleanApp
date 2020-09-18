@@ -152,9 +152,9 @@ extension SignUpView: ConfigurableView {
     }
     
     func configureConstraints() {
-        
-        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        
+//        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
 }

@@ -29,13 +29,13 @@ class SignUpViewControllerTests: XCTestCase {
     }
     
     func test_signUpViewController_createAccountButton_tap_calls_signupMethod() {
-        let sut = createSUT()
         var callCounter = 0
-        var signUpSpy: () -> Void = {
+        let signUpSpy: () -> Void = {
             callCounter += 1
         }
+        let sut = createSUT(signUpSpy: signUpSpy)
         sut.signUpView.createAccountButton.simulateTap()
-        XCTAssertNotNil(sut as AlertView)
+        XCTAssertEqual(callCounter, 1)
     }
 
 }
@@ -46,6 +46,7 @@ extension SignUpViewControllerTests {
         let signUpView = SignUpView()
         let sut = SignUpViewController(signUpView: signUpView)
         sut.signUp = signUpSpy
+        sut.loadViewIfNeeded()
         return sut
     }
     

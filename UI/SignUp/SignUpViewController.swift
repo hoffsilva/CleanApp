@@ -14,6 +14,8 @@ class SignUpViewController: UIViewController {
     
     let signUpView: SignUpView
     
+    var signUp: (() -> Void)?
+    
     init(signUpView: SignUpView) {
         self.signUpView = signUpView
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +32,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        configureAsRootView(signUpView)
+        setupBindings()
     }
     
     func configureAsRootView(_ view: UIView) {
@@ -39,6 +42,14 @@ class SignUpViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         view.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    }
+    
+    private func setupBindings() {
+        signUpView.createAccountButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func createButtonTapped() {
+        signUp?()
     }
     
 }
