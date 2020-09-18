@@ -44,6 +44,7 @@ class SignUpViewController: UIViewController {
 }
 
 extension SignUpViewController: LoadingView {
+    
     func show() {
         self.signUpView.activityIndicator.isHidden = false
         self.signUpView.activityIndicator.startAnimating()
@@ -54,7 +55,15 @@ extension SignUpViewController: LoadingView {
         self.signUpView.activityIndicator.stopAnimating()
     }
     
-    
-    
-    
+}
+
+extension SignUpViewController: AlertView {
+
+    func showMessage(viewModel: AlertViewModel) {
+        let alerController = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alerController.addAction(okAction)
+        present(alerController, animated: true)
+    }
+
 }
