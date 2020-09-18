@@ -10,8 +10,22 @@ import XCTest
 
 class EmailValidatorAdapterTests: XCTestCase {
 
-    func testExample() {
-        
+    func test_email_when_isInvalid() {
+        let sut = createSUT()
+        XCTAssertFalse(sut.validate(email: ""))
+        XCTAssertFalse(sut.validate(email: "as"))
+        XCTAssertFalse(sut.validate(email: "as@"))
+        XCTAssertFalse(sut.validate(email: "sa@as"))
+        XCTAssertFalse(sut.validate(email: "as@as."))
+        XCTAssertFalse(sut.validate(email: "@as.as"))
     }
 
+}
+
+extension EmailValidatorAdapterTests {
+    
+    func createSUT() -> EmailValidatorAdapter {
+        EmailValidatorAdapter()
+    }
+    
 }
