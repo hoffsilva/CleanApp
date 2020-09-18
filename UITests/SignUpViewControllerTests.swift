@@ -8,6 +8,7 @@
 
 import XCTest
 import Presentation
+import Domain
 @testable import UI
 
 class SignUpViewControllerTests: XCTestCase {
@@ -29,20 +30,23 @@ class SignUpViewControllerTests: XCTestCase {
     }
     
     func test_signUpViewController_createAccountButton_tap_calls_signupMethod() {
-        var callCounter = 0
-        let signUpSpy: () -> Void = {
-            callCounter += 1
-        }
+        var signUpViewModel: SignUpViewModel?
+        let signUpSpy: (SignUpViewModel) -> Void = { signUpViewModel = $0 }
         let sut = createSUT(signUpSpy: signUpSpy)
+        let  expectedSignUpViewModel = SignUpViewModel(
+            name: sut.signUpView.nameTextField.text,
+            email: sut.signUpView.emailTextField.text,
+            password: sut.signUpView.passwordTextField.text,
+            passwordConfirmation: sut.signUpView.passwordConfirmationTextField.text)
         sut.signUpView.createAccountButton.simulateTap()
-        XCTAssertEqual(callCounter, 1)
+        XCTAssertEqual(expectedSignUpViewModel, signUpViewModel)
     }
 
 }
 
 extension SignUpViewControllerTests {
     
-    func createSUT(signUpSpy: (() -> Void)? = nil ) -> SignUpViewController {
+    func createSUT(signUpSpy: ((SignUpViewModel) -> Void)? = nil ) -> SignUpViewController {
         let signUpView = SignUpView()
         let sut = SignUpViewController(signUpView: signUpView)
         sut.signUp = signUpSpy

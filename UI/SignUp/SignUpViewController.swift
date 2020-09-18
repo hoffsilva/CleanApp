@@ -14,7 +14,7 @@ class SignUpViewController: UIViewController {
     
     let signUpView: SignUpView
     
-    var signUp: (() -> Void)?
+    var signUp: ((SignUpViewModel) -> Void)?
     
     init(signUpView: SignUpView) {
         self.signUpView = signUpView
@@ -49,7 +49,12 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func createButtonTapped() {
-        signUp?()
+        let viewModel = SignUpViewModel(
+            name: signUpView.nameTextField.text,
+            email: signUpView.emailTextField.text,
+            password: signUpView.passwordTextField.text,
+            passwordConfirmation: signUpView.passwordConfirmationTextField.text)
+        signUp?(viewModel)
     }
     
 }
