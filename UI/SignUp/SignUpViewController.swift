@@ -63,11 +63,13 @@ extension SignUpViewController: LoadingView {
     
     func show() {
         self.signUpView.activityIndicator.isHidden = false
+        self.signUpView.isUserInteractionEnabled = false
         self.signUpView.activityIndicator.startAnimating()
     }
     
     func hide() {
         self.signUpView.activityIndicator.isHidden = true
+        self.signUpView.isUserInteractionEnabled = true
         self.signUpView.activityIndicator.stopAnimating()
     }
     
