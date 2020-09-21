@@ -10,28 +10,24 @@ import Foundation
 import UIKit
 import Presentation
 
-class SignUpViewController: UIViewController {
+public final class SignUpViewController: UIViewController {
     
-    let signUpView: SignUpView
+    public let signUpView: SignUpView
     
-    var signUp: ((SignUpViewModel) -> Void)?
+    public var signUp: ((SignUpViewModel) -> Void)?
     
-    init(signUpView: SignUpView) {
+    public init(signUpView: SignUpView) {
         self.signUpView = signUpView
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    override func loadView() {
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
-//        configureAsRootView(signUpView)
+        configureAsRootView(signUpView)
         setupBindings()
     }
     
@@ -61,13 +57,13 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: LoadingView {
     
-    func show() {
+    public func show() {
         self.signUpView.activityIndicator.isHidden = false
         self.signUpView.isUserInteractionEnabled = false
         self.signUpView.activityIndicator.startAnimating()
     }
     
-    func hide() {
+    public func hide() {
         self.signUpView.activityIndicator.isHidden = true
         self.signUpView.isUserInteractionEnabled = true
         self.signUpView.activityIndicator.stopAnimating()
@@ -77,7 +73,7 @@ extension SignUpViewController: LoadingView {
 
 extension SignUpViewController: AlertView {
 
-    func showMessage(viewModel: AlertViewModel) {
+    public func showMessage(viewModel: AlertViewModel) {
         let alerController = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
         alerController.addAction(okAction)

@@ -9,21 +9,24 @@
 import Foundation
 import UIKit
 
-class SignUpView: UIView {
+public class SignUpView: UIView {
     
     lazy var contentTableView: UITableView = {
         let tableView = UITableView()
+        tableView.prepareForConstraints()
         tableView.allowsSelection = false
-        tableView.separatorInset = .zero
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
     
     lazy var contentCell: UITableViewCell = {
         let cell = UITableViewCell()
-        cell.prepareForConstraints()
+        cell.backgroundColor = .clear
+        cell.contentView.prepareForConstraints()
         return cell
     }()
     
@@ -33,6 +36,7 @@ class SignUpView: UIView {
         stackView.axis = .vertical
         stackView.prepareForConstraints()
         stackView.spacing = 15
+        stackView.distribution = .fill
         return stackView
     }()
     
@@ -57,7 +61,7 @@ class SignUpView: UIView {
         let label = UILabel()
         label.text = "TestApp"
         label.font = UIFont(name: "Arial", size: 20)
-        label.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         label.prepareForConstraints()
         label.textAlignment = .center
         return label
@@ -68,7 +72,17 @@ class SignUpView: UIView {
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.prepareForConstraints()
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    lazy var bodyContentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.prepareForConstraints()
         stackView.spacing = 10
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -77,6 +91,8 @@ class SignUpView: UIView {
         textField.placeholder = "Name"
         textField.prepareForConstraints()
         textField.keyboardType = .default
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
@@ -85,6 +101,8 @@ class SignUpView: UIView {
         textField.placeholder = "Email"
         textField.prepareForConstraints()
         textField.keyboardType = .emailAddress
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
@@ -94,6 +112,8 @@ class SignUpView: UIView {
         textField.prepareForConstraints()
         textField.keyboardType = .default
         textField.isSecureTextEntry = true
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
@@ -103,6 +123,8 @@ class SignUpView: UIView {
         textField.prepareForConstraints()
         textField.keyboardType = .default
         textField.isSecureTextEntry = true
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
@@ -127,14 +149,15 @@ class SignUpView: UIView {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.prepareForConstraints()
         activityIndicator.style = .large
+        activityIndicator.color = .orange
         return activityIndicator
     }()
     
     
-    init() {
+    public init() {
         super.init(frame: CGRect.zero)
         self.configureObjects()
-        self.backgroundColor = .brown
+        self.backgroundColor = .black
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -147,42 +170,52 @@ extension SignUpView: ConfigurableView {
     
     func configureObjectsHierarchy() {
         self.addSubview(contentTableView)
-        self.contentCell.addSubview(contentStackView)
-        self.contentCell.addSubview(activityIndicator)
+        self.contentCell.contentView.addSubview(contentStackView)
         self.contentStackView.addArrangedSubview(headerStackView)
         self.headerStackView.addArrangedSubview(logoLabel)
         self.headerStackView.addArrangedSubview(logoTextLabel)
         self.contentStackView.addArrangedSubview(bodyStackView)
-        self.bodyStackView.addArrangedSubview(nameTextField)
-        self.bodyStackView.addArrangedSubview(emailTextField)
-        self.bodyStackView.addArrangedSubview(passwordTextField)
-        self.bodyStackView.addArrangedSubview(passwordConfirmationTextField)
+        self.bodyStackView.addArrangedSubview(bodyContentStackView)
+        self.bodyContentStackView.addArrangedSubview(nameTextField)
+        self.bodyContentStackView.addArrangedSubview(emailTextField)
+        self.bodyContentStackView.addArrangedSubview(passwordTextField)
+        self.bodyContentStackView.addArrangedSubview(passwordConfirmationTextField)
         self.contentStackView.addArrangedSubview(footerStackView)
         self.footerStackView.addArrangedSubview(createAccountButton)
+        self.contentCell.contentView.addSubview(activityIndicator)
     }
     
     func configureConstraints() {
         contentTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         contentTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        contentTableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        contentTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        contentTableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 24).isActive = true
+        contentTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 24).isActive = true
         
-        contentStackView.trailingAnchor.constraint(equalTo: contentCell.trailingAnchor, constant: 24).isActive = true
-        contentStackView.leadingAnchor.constraint(equalTo: contentCell.leadingAnchor, constant: 24).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: contentCell.topAnchor, constant: 0).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: contentCell.bottomAnchor, constant: 0).isActive = true
+        contentCell.contentView.trailingAnchor.constraint(equalTo: contentCell.trailingAnchor).isActive = true
+        contentCell.contentView.leadingAnchor.constraint(equalTo: contentCell.leadingAnchor).isActive = true
         
-        contentStackView.setContentHuggingPriority(UILayoutPriority.init(249), for: .vertical)
-        contentStackView.setContentHuggingPriority(UILayoutPriority.init(249), for: .horizontal)
+        contentStackView.trailingAnchor.constraint(equalTo: contentCell.contentView.trailingAnchor, constant: -24).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: contentCell.contentView.leadingAnchor, constant: 24).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: contentCell.contentView.topAnchor, constant: 0).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: contentCell.contentView.bottomAnchor, constant: 0).isActive = true
+        contentStackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 50).isActive = true
         
+        headerStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         logoTextLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        nameTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        emailTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        passwordConfirmationTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        bodyStackView.setContentHuggingPriority(UILayoutPriority.init(249), for: .vertical)
+        bodyStackView.setContentHuggingPriority(UILayoutPriority.init(249), for: .horizontal)
         
-        createAccountButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        bodyStackView.setContentCompressionResistancePriority(UILayoutPriority.init(749), for: .vertical)
+        bodyStackView.setContentCompressionResistancePriority(UILayoutPriority.init(749), for: .horizontal)
+        
+        bodyContentStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        nameTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        emailTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        passwordConfirmationTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        footerStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         activityIndicator.centerXAnchor.constraint(equalTo: createAccountButton.centerXAnchor, constant: 0).isActive = true
         activityIndicator.trailingAnchor.constraint(equalTo: createAccountButton.trailingAnchor, constant: -20).isActive = true
         activityIndicator.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -192,17 +225,29 @@ extension SignUpView: ConfigurableView {
 
 extension SignUpView: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         contentCell
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         1
+    }
+    
+}
+
+extension SignUpView: UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
     
 }

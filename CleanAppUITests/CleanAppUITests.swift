@@ -1,6 +1,6 @@
 //
-//  MainUITests.swift
-//  MainUITests
+//  CleanAppUITests.swift
+//  CleanAppUITests
 //
 //  Created by Hoff Henry Pereira da Silva on 19/09/20.
 //  Copyright © 2020 Hoff Henry Pereira da Silva. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class MainUITests: XCTestCase {
+class CleanAppUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
