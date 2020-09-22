@@ -9,7 +9,7 @@
 import Foundation
 import Domain
 
-public final class AddAccountUseCaseImplementation {
+public final class AddAccountUseCaseImplementation: AddAccountUseCase {
     
     private let url: URL
     private let httpClient: HttpPostClient

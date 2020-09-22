@@ -14,6 +14,7 @@
 		0B07F04B251556CA00D0A7B4 /* Presentation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CA870BE224F52B240064266E /* Presentation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0B07F0572515598A00D0A7B4 /* EmailValidatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F0562515598A00D0A7B4 /* EmailValidatorAdapter.swift */; };
 		0B07F05F251559A800D0A7B4 /* EmailValidatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07F0562515598A00D0A7B4 /* EmailValidatorAdapter.swift */; };
+		0B0C44D82519784C003F5419 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C44D72519784C003F5419 /* Constants.swift */; };
 		0B5796E725164FF500C4457C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5796E625164FF500C4457C /* AppDelegate.swift */; };
 		0B5796E925164FF500C4457C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5796E825164FF500C4457C /* SceneDelegate.swift */; };
 		0B5796F025164FF600C4457C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5796EF25164FF600C4457C /* Assets.xcassets */; };
@@ -322,6 +323,7 @@
 		0B07F0202515553C00D0A7B4 /* EmailValidatorAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorAdapterTests.swift; sourceTree = "<group>"; };
 		0B07F0222515553C00D0A7B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B07F0562515598A00D0A7B4 /* EmailValidatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorAdapter.swift; sourceTree = "<group>"; };
+		0B0C44D72519784C003F5419 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B5796E425164FF500C4457C /* CleanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5796E625164FF500C4457C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B5796E825164FF500C4457C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				0B5796EF25164FF600C4457C /* Assets.xcassets */,
 				0B5796F125164FF600C4457C /* LaunchScreen.storyboard */,
 				0B5796F425164FF600C4457C /* Info.plist */,
+				0B0C44D72519784C003F5419 /* Constants.swift */,
 			);
 			path = CleanApp;
 			sourceTree = "<group>";
@@ -1362,6 +1365,7 @@
 				0B5796E725164FF500C4457C /* AppDelegate.swift in Sources */,
 				0B579760251650BE00C4457C /* SignUpFactory.swift in Sources */,
 				0B5796E925164FF500C4457C /* SceneDelegate.swift in Sources */,
+				0B0C44D82519784C003F5419 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
