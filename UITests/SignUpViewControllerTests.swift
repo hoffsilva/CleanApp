@@ -10,7 +10,7 @@ import XCTest
 import Presentation
 import Domain
 @testable import UI
-
+	
 class SignUpViewControllerTests: XCTestCase {
 
     func test_loading_is_hidden_on_start() {

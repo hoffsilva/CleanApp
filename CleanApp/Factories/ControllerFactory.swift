@@ -1,5 +1,5 @@
 //
-//  SignUpFactory.swift
+//  ControllerFactory.swift
 //  CleanApp
 //
 //  Created by Hoff Henry Pereira da Silva on 19/09/20.
@@ -12,13 +12,12 @@ import Presentation
 import Validation
 import Data
 import Infra
+import Domain
 
-class SignUpFactory {
-    static func createController() -> SignUpViewController {
+class ControllerFactory {
+    static func createSignUp(addAccount: AddAccountUseCase) -> SignUpViewController {
         let signUpViewController = SignUpViewController(signUpView: SignUpView())
         let emailValidator = EmailValidatorAdapter()
-        let alamoFireAdapter = AlamofireAdapter()
-        let addAccount = AddAccountUseCaseImplementation(url: URL(string: Constants.baseURL)!, httpClient: alamoFireAdapter)
         let presenter = SignUpPresenter(
             alertView: signUpViewController,
             emailValidator: emailValidator,
