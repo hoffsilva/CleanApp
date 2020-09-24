@@ -236,25 +236,6 @@ extension SignUpPresenterTests {
         
     }
     
-    class AddAccountSpy: AddAccountUseCase {
-        
-        var addAccountModel: AddAccountModel?
-        var completion: ((Result<AccountModel, DomainError>) -> Void)?
-        
-        func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel, DomainError>) -> Void) {
-            self.addAccountModel = addAccountModel
-            self.completion = completion
-        }
-        
-        func completeWithError(_ error: DomainError) {
-            completion?(.failure(error))
-        }
-        
-        func completionWithAccount(account: AccountModel) {
-            completion?(.success(account))
-        }
-    }
-    
     class LoadingViewSpy: LoadingView {
         
         var observableLoadingState: ((Bool) -> Void)?

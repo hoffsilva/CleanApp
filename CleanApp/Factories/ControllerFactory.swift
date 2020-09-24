@@ -19,11 +19,35 @@ class ControllerFactory {
         let signUpViewController = SignUpViewController(signUpView: SignUpView())
         let emailValidator = EmailValidatorAdapter()
         let presenter = SignUpPresenter(
-            alertView: signUpViewController,
+            alertView: Proxy(instance: signUpViewController),
             emailValidator: emailValidator,
             addAccount: addAccount,
-            loadingView: signUpViewController)
+            loadingView: Proxy(instance: signUpViewController))
         signUpViewController.signUp = presenter.signUp
         return signUpViewController
+    }
+}
+
+class Proxy<Element: AnyObject> {
+    private weak var instance: Element?
+    
+    init(instance: Element) {
+        self.instance = instance
+    }
+}
+
+extension Proxy: AlertView where Element: AlertView {
+    func showMessage(viewModel: AlertViewModel) {
+        instance?.showMessage(viewModel: viewModel)
+    }
+}
+
+extension Proxy: LoadingView where Element: LoadingView {
+    func show() {
+        instance?.show()
+    }
+
+    func hide() {
+        instance?.hide()
     }
 }
