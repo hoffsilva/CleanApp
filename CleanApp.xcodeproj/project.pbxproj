@@ -331,6 +331,8 @@
 		0B07F0222515553C00D0A7B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B07F0562515598A00D0A7B4 /* EmailValidatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidatorAdapter.swift; sourceTree = "<group>"; };
 		0B0C44D72519784C003F5419 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0B53CD01251D70970083F431 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		0B53CD02251D71350083F431 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		0B5796E425164FF500C4457C /* CleanApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5796E625164FF500C4457C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B5796E825164FF500C4457C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -545,9 +547,19 @@
 			path = ValidationTests;
 			sourceTree = "<group>";
 		};
+		0B53CD00251D707D0083F431 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				0B53CD02251D71350083F431 /* Release.xcconfig */,
+				0B53CD01251D70970083F431 /* Debug.xcconfig */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
 		0B5796E525164FF500C4457C /* CleanApp */ = {
 			isa = PBXGroup;
 			children = (
+				0B53CD00251D707D0083F431 /* Environment */,
 				0BEA84FB251D69E90064C5F0 /* Proxies */,
 				0B6DD28A251D609000468376 /* Composers */,
 				0B57975E251650A700C4457C /* Factories */,
@@ -1761,6 +1773,7 @@
 		};
 		0B57970C25164FF600C4457C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B53CD01251D70970083F431 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1782,6 +1795,7 @@
 		};
 		0B57970D25164FF600C4457C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B53CD02251D71350083F431 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
