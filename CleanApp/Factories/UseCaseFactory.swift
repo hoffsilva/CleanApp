@@ -12,9 +12,15 @@ import Infra
 import Data
 
 final class UseCaseFctory {
+    
+    private static let httpClient = AlamofireAdapter()
+    
     static func createAddAccount() -> AddAccountUseCase {
-        let alamoFireAdapter = AlamofireAdapter()
-        let addAccount = AddAccountUseCaseImplementation(url: URL(string: Constants.baseURL)!, httpClient: alamoFireAdapter)
+        let addAccount = AddAccountUseCaseImplementation(url: createEndpoint(resource: Constants.Resource.signup), httpClient: httpClient)
         return addAccount
+    }
+    
+    private static func createEndpoint(resource: String) -> URL {
+        URL(string: "\(Constants.URL.base)\(resource)")!
     }
 }
