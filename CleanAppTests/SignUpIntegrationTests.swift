@@ -7,13 +7,27 @@
 //
 
 import XCTest
+import UI
 @testable import CleanApp
 
 class SignUpIntegrationTests: XCTestCase {
 
-    func testExample() {
-        let sut = SignUpComposer.composeControllerWith(AddAccountSpy())
-        checkMemomryLeak(for: sut)
+    func test_background_request_should_complete_on_main_thread() {
+        let addAccountSpy = AddAccountSpy()
+        let sut = createSUT(addAccountSpy: addAccountSpy)
+        sut.loadViewIfNeeded()
+        DispatchQueue.global().async {
+            addAccountSpy.completeWithError(.unexpected)
+        }
     }
 
+}
+
+extension SignUpIntegrationTests {
+    func createSUT(addAccountSpy: AddAccountSpy, file: StaticString = #filePath, line: UInt = #line) -> SignUpViewController {
+        let sut = SignUpComposer.composeControllerWith(addAccountSpy)
+        checkMemomryLeak(for: sut, file: file, line: line)
+        checkMemomryLeak(for: addAccountSpy, file: file, line: line)
+        return sut
+    }
 }
