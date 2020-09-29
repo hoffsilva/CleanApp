@@ -15,18 +15,22 @@ public final class SignUpPresenter {
     private let emailValidator: EmailValidator
     private let addAccount: AddAccountUseCase
     private let loadingView: LoadingView
+    private let validation: Validation
     
     public init(alertView: AlertView,
                 emailValidator: EmailValidator,
                 addAccount: AddAccountUseCase,
-                loadingView: LoadingView) {
+                loadingView: LoadingView,
+                validation: Validation) {
         self.alertView = alertView
         self.emailValidator = emailValidator
         self.addAccount = addAccount
         self.loadingView = loadingView
+        self.validation = validation
     }
     
     public func signUp(viewModel: SignUpViewModel) {
+        _ = validation.validate(data: viewModel.toData()?.toJSON())
         if let message = validateField(viewModel: viewModel) {
             alertView.showMessage(viewModel: AlertViewModel(title: "Campo Inválido", message: message))
         } else {

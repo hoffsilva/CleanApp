@@ -172,6 +172,41 @@ class SignUpPresenterTests: XCTestCase {
         addAccount.completionWithAccount(account: TestTools.createAccountModel())
         wait(for: [expec], timeout: 1)
     }
+    
+    func test_signUp_should_call_validation_with_correct_values() {
+        let validationSpy = ValidationSpy()
+        let sut = createSUT(validation: validationSpy)
+        let signUpViewModel = createSignUpViewModel()
+        sut.signUp(viewModel: signUpViewModel)
+        XCTAssertTrue(NSDictionary(dictionary: validationSpy.data!).isEqual(to: (signUpViewModel.toData()?.toJSON()!)!))
+    }
+    
+    func test_signUp_should_show_error_message_when_validation_fails() {
+        let alertViewSpy = AlertViewSpy()
+        let validationSpy = ValidationSpy()
+        let sut = createSUT(alertView: alertViewSpy, validation: validationSpy)
+        let expected = AlertViewModel(title: "Falha na validação", message: "Erro")
+        setUpExpectation()
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+            self.expec.fulfill()
+        }
+        //todo - create simulate - 22:26
+        let signUpViewModel = createSignUpViewModel(name: nil)
+        sut.signUp(viewModel: signUpViewModel)
+        wait(for: [expec], timeout: 1)
+    }
+    
+}
+
+class ValidationSpy: Validation {
+    var data: [String:Any]?
+    
+    func validate(data: [String:Any]?) -> String? {
+        self.data = data
+        return nil
+    }
+    
 }
 
 extension SignUpPresenterTests {
@@ -185,10 +220,16 @@ extension SignUpPresenterTests {
         emailValidator: EmailValidator = EmailValidatorSpy(),
         addAccount: AddAccountSpy = AddAccountSpy(),
         loadingView: LoadingView = LoadingViewSpy(),
+        validation: Validation = ValidationSpy(),
         file: StaticString = #file,
         line: UInt = #line
     ) -> SignUpPresenter {
-        let sut = SignUpPresenter(alertView: alertView, emailValidator: emailValidator, addAccount: addAccount, loadingView: loadingView)
+        let sut = SignUpPresenter(
+            alertView: alertView,
+            emailValidator: emailValidator,
+            addAccount: addAccount,
+            loadingView: loadingView,
+            validation: validation)
         checkMemomryLeak(for: sut, file: file, line: line)
         return sut
     }

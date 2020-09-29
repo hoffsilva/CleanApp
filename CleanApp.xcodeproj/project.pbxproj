@@ -62,6 +62,7 @@
 		0BE4945824E6162500ABA24D /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4945724E6162500ABA24D /* URLProtocolStub.swift */; };
 		0BEA84F1251D65FD0064C5F0 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
 		0BEA84FD251D69FB0064C5F0 /* WaekReferenceCycleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA84FC251D69FB0064C5F0 /* WaekReferenceCycleProxy.swift */; };
+		CA2E4FF925235FCE000EE3AC /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2E4FF825235FCE000EE3AC /* Validation.swift */; };
 		CA44071A251D5C72003F1511 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA440719251D5C72003F1511 /* UseCaseFactory.swift */; };
 		CA52692C250D9A9300C0D6CA /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */; };
 		CA5A856024E71F55009524D4 /* AlamofireAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A855F24E71F55009524D4 /* AlamofireAdapter.swift */; };
@@ -374,6 +375,7 @@
 		0BD8C20924DCD61A00277296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BE4945724E6162500ABA24D /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		0BEA84FC251D69FB0064C5F0 /* WaekReferenceCycleProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaekReferenceCycleProxy.swift; sourceTree = "<group>"; };
+		CA2E4FF825235FCE000EE3AC /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		CA440719251D5C72003F1511 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
 		CA52692B250D9A9300C0D6CA /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		CA5A855F24E71F55009524D4 /* AlamofireAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapter.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 			isa = PBXGroup;
 			children = (
 				CA870C0B24F6868E0064266E /* EmailValidator.swift */,
+				CA2E4FF825235FCE000EE3AC /* Validation.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -1505,6 +1508,7 @@
 				CA870C0524F5764B0064266E /* AlertView.swift in Sources */,
 				CA870C0924F576A90064266E /* AlertViewModel.swift in Sources */,
 				CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */,
+				CA2E4FF925235FCE000EE3AC /* Validation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

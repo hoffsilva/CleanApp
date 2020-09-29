@@ -9,7 +9,7 @@
 import Foundation
 import Domain
 
-public struct SignUpViewModel: Equatable {
+public struct SignUpViewModel: Equatable, Codable {
     public var name: String?
     public var email: String?
     public var password: String?

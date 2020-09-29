@@ -22,7 +22,7 @@ class ControllerFactory {
             alertView: WaekReferenceCycleProxy(instance: signUpViewController),
             emailValidator: emailValidator,
             addAccount: addAccount,
-            loadingView: WaekReferenceCycleProxy(instance: signUpViewController))
+            loadingView: WaekReferenceCycleProxy(instance: signUpViewController), validation: <#Validation#>)
         signUpViewController.signUp = presenter.signUp
         return signUpViewController
     }
