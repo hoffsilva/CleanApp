@@ -8,11 +8,23 @@
 
 import XCTest
 import Presentation
+import Validation
 
 class ValidationCompositeTests: XCTestCase {
 
     func test_validate_should_return_error_when_any_validator_fails() {
-        let sut = ValidationComposite(validators: [Validation])
+        let validadtionSpy = ValidationSpy()
+        validadtionSpy.simulateError("Erro 1")
+        let sut = ValidationComposite(validators: [validadtionSpy])
+        let errorMessage = sut.validate(data: ["":""])
+        XCTAssertEqual(errorMessage, "Erro 1")
+    }
+    
+    func test_validate_should_return_nil_when_any_validator_succeed() {
+        let validadtionSpy = ValidationSpy()
+        let sut = ValidationComposite(validators: [validadtionSpy])
+        let errorMessage = sut.validate(data: ["":""])
+        XCTAssertNil(errorMessage)
     }
 
 }

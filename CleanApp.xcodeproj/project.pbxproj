@@ -99,6 +99,7 @@
 		CA951990250D8D6E004C51FB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA95198F250D8D6E004C51FB /* SignUpViewController.swift */; };
 		CA951993250D8F49004C51FB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951992250D8F49004C51FB /* SignUpView.swift */; };
 		CA951995250D8FD5004C51FB /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951994250D8FD5004C51FB /* ConfigurableView.swift */; };
+		CAB6C67B2528C54A003AF530 /* ValidationSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C67A2528C54A003AF530 /* ValidationSpy.swift */; };
 		CAF119A12508FB1600C6E860 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		CAF119A3250A51DA00C6E860 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
 		CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF119A4250BA03C00C6E860 /* LoadingView.swift */; };
@@ -432,6 +433,7 @@
 		CA95198F250D8D6E004C51FB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CA951992250D8F49004C51FB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CA951994250D8FD5004C51FB /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		CAB6C67A2528C54A003AF530 /* ValidationSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSpy.swift; sourceTree = "<group>"; };
 		CAF119A4250BA03C00C6E860 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -583,6 +585,7 @@
 				CA2ED7DB2525E93F005291E8 /* RequiredFieldValidationTests.swift */,
 				CA2BDDD725273C5900C29413 /* EmailValidationTests.swift */,
 				CA2BDDF62527453C00C29413 /* ValidationCompositeTests.swift */,
+				CAB6C67A2528C54A003AF530 /* ValidationSpy.swift */,
 			);
 			path = ValidationTests;
 			sourceTree = "<group>";
@@ -1486,6 +1489,7 @@
 				CA2ED81D2525F08D005291E8 /* CompareFieldValidationTests.swift in Sources */,
 				CA2ED7F32525EF66005291E8 /* XCTestCase+Utils.swift in Sources */,
 				CA2BDDF72527453C00C29413 /* ValidationCompositeTests.swift in Sources */,
+				CAB6C67B2528C54A003AF530 /* ValidationSpy.swift in Sources */,
 				CA2ED7DC2525E93F005291E8 /* RequiredFieldValidationTests.swift in Sources */,
 				CA2ED77E2525E1D4005291E8 /* EmailValidatorSpy.swift in Sources */,
 				CA2BDDD825273C5900C29413 /* EmailValidationTests.swift in Sources */,

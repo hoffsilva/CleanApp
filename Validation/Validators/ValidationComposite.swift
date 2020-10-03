@@ -18,7 +18,12 @@ public class ValidationComposite: Validation {
     }
     
     public func validate(data: [String : Any]?) -> String? {
-        
+        for validator in validators {
+            if let errorMessage = validator.validate(data: data) {
+                return errorMessage
+            }
+        }
+        return nil
     }
     
 }
