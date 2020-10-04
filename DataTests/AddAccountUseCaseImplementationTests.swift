@@ -63,6 +63,15 @@ class AddAccountUseCaseImplementationTests: XCTestCase {
         
     }
     
+    func test_add_should_complete_with_existent_email_error_when_client_returns_403() {
+        
+        let httpClient = HttpClientSpy()
+        expect(createSUT(with: httpClient), completeWith: .failure(.emailInUse), when: {
+            httpClient.completionWithError(.fourHundred)
+        })
+        
+    }
+    
     func test_add_should_not_complete_when_sut_is_dealocated() {
         
         let httpClient = HttpClientSpy()

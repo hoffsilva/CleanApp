@@ -12,4 +12,5 @@ public enum DomainError: Error, Equatable {
     case unexpected
     case parseFailed
     case custom(String)
+    case emailInUse
 }

@@ -24,8 +24,13 @@ public final class AddAccountUseCaseImplementation: AddAccountUseCase {
         httpClient.post(to: url, with: addAccountModel.toData()) { [weak self] result in
             guard self != nil else { return }
             switch result {
-            case .failure:
-                completion(.failure(.unexpected))
+            case .failure(let error):
+                switch error {
+                case .fourHundred:
+                    completion(.failure(.emailInUse))
+                default:
+                    completion(.failure(.unexpected))
+                }
             case .success(let data):
                 guard let accountModel: AccountModel = data?.toModel() else {
                     completion(.failure(.parseFailed))
