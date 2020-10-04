@@ -23,7 +23,7 @@ public class EmailValidation: Validation {
     }
     
     public func validate(data: [String : Any]?) -> String? {
-        guard let email = data?[self.fieldName.rawValue] as? String,
+        guard let email = data?["\(fieldName)"] as? String,
               !emailValidator.validate(email: email) else {
             return nil
         }

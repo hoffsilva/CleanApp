@@ -20,6 +20,11 @@ public class RequiredFieldValidation: Validation {
     }
     
     public func validate(data: [String : Any]?) -> String? {
-        "O campo \(fieldNameLabel) é obrigatório"
+        guard let fieldText = data?["\(fieldName)"] as? String,
+              !fieldText.isEmpty else {
+            return "O campo \(fieldNameLabel) é obrigatório"
+        }
+        return nil
     }
+    
 }

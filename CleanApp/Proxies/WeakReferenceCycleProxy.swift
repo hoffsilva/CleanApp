@@ -1,5 +1,5 @@
 //
-//  WaekReferenceCycleProxy.swift
+//  WeakReferenceCycleProxy.swift
 //  CleanApp
 //
 //  Created by Hoff Henry Pereira da Silva on 24/09/20.
@@ -9,7 +9,7 @@
 import Presentation
 import Foundation
 
-class WaekReferenceCycleProxy<Element: AnyObject> {
+class WeakReferenceCycleProxy<Element: AnyObject> {
     private weak var instance: Element?
     
     init(instance: Element) {
@@ -17,13 +17,13 @@ class WaekReferenceCycleProxy<Element: AnyObject> {
     }
 }
 
-extension WaekReferenceCycleProxy: AlertView where Element: AlertView {
+extension WeakReferenceCycleProxy: AlertView where Element: AlertView {
     func showMessage(viewModel: AlertViewModel) {
         instance?.showMessage(viewModel: viewModel)
     }
 }
 
-extension WaekReferenceCycleProxy: LoadingView where Element: LoadingView {
+extension WeakReferenceCycleProxy: LoadingView where Element: LoadingView {
     func show() {
         instance?.show()
     }

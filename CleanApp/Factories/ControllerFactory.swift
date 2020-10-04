@@ -17,13 +17,25 @@ import Domain
 class ControllerFactory {
     static func createSignUp(addAccount: AddAccountUseCase) -> SignUpViewController {
         let signUpViewController = SignUpViewController(signUpView: SignUpView())
-        let emailValidator = EmailValidatorAdapter()
+        let validationComposite = ValidationComposite(validators: self.createValidations())
         let presenter = SignUpPresenter(
-            alertView: WaekReferenceCycleProxy(instance: signUpViewController),
-            emailValidator: emailValidator,
+            alertView: WeakReferenceCycleProxy(instance: signUpViewController),
             addAccount: addAccount,
-            loadingView: WaekReferenceCycleProxy(instance: signUpViewController), validation: <#Validation#>)
+            loadingView: WeakReferenceCycleProxy(instance: signUpViewController),
+            validation: validationComposite)
         signUpViewController.signUp = presenter.signUp
         return signUpViewController
     }
+    
+    private static func createValidations() -> [Validation] {
+        [
+            RequiredFieldValidation(fieldName: .name),
+            RequiredFieldValidation(fieldName: .email),
+            EmailValidation(fieldName: .email, emailValidator: EmailValidatorAdapter()),
+            RequiredFieldValidation(fieldName: .password),
+            RequiredFieldValidation(fieldName: .passwordConfirmation),
+            CompareFieldValidation(fieldName: .password, fieldNameToCompare: .passwordConfirmation)
+        ]
+    }
+    
 }

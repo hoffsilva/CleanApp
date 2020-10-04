@@ -10,9 +10,9 @@ import Foundation
 
 public enum Constants {
     public enum URL {
-        static let base = "https://clean-node-api.herokuapp.com/api"
+        static let base = "https://fordevs.herokuapp.com/api"
     }
     public enum Resource {
-        static let signup = "signup"
+        static let signup = "/signup"
     }
 }
