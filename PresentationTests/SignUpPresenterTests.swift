@@ -26,13 +26,26 @@ class SignUpPresenterTests: XCTestCase {
         let alertViewSpy = AlertViewSpy()
         let addAccountSpy = AddAccountSpy()
         let sut = createSUT(alertView: alertViewSpy, addAccount: addAccountSpy)
-        let expected = createInvalidResponseAlertViewModel(message: "deu merda aqui!")
+        let expected = createInvalidResponseAlertViewModel(message: "Algo inesperado aconteceu!")
         alertViewSpy.observeViewModel { (alertViewModel) in
             XCTAssertEqual(alertViewModel, expected)
         }
         let signUpViewModel = createSignUpViewModel()
         sut.signUp(viewModel: signUpViewModel)
         addAccountSpy.completeWithError(.unexpected)
+    }
+    
+    func test_signUp_should_show_error_emailInUse_message_if_addAccount_fails() {
+        let alertViewSpy = AlertViewSpy()
+        let addAccountSpy = AddAccountSpy()
+        let sut = createSUT(alertView: alertViewSpy, addAccount: addAccountSpy)
+        let expected = createInvalidResponseAlertViewModel(message: "Esse email já foi cadastrado!")
+        alertViewSpy.observeViewModel { (alertViewModel) in
+            XCTAssertEqual(alertViewModel, expected)
+        }
+        let signUpViewModel = createSignUpViewModel()
+        sut.signUp(viewModel: signUpViewModel)
+        addAccountSpy.completeWithError(.emailInUse)
     }
     
     func test_signUp_should_show_loadingView_while_addAccount_is_processing() {
@@ -94,6 +107,8 @@ class SignUpPresenterTests: XCTestCase {
         sut.signUp(viewModel: createSignUpViewModel())
         wait(for: [expec], timeout: 1)
     }
+    
+    
     
 }
 
@@ -169,4 +184,3 @@ extension SignUpPresenterTests {
     }
     
 }
-

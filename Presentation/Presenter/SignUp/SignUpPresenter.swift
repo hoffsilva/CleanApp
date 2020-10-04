@@ -34,8 +34,16 @@ public final class SignUpPresenter {
             self.loadingView.show()
             addAccount.add(addAccountModel: addAccountModel, completion: { [weak self] response in
                 switch response {
-                case .failure:
-                    self?.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: "deu merda aqui!"))
+                case .failure(let error):
+                    var errorMessage = ""
+                    switch error {
+                    case .emailInUse:
+                        errorMessage = "Esse email já foi cadastrado!"
+                    default:
+                        errorMessage = "Algo inesperado aconteceu!"
+                    }
+                    self?.alertView.showMessage(viewModel: AlertViewModel(title: "Erro", message: errorMessage))
+                    
                 case .success:
                     self?.alertView.showMessage(viewModel: AlertViewModel(title: "Sucesso", message: "Conta criada com sucesso!"))
                 }

@@ -9,5 +9,6 @@
 import Foundation
 
 public protocol AddAccountUseCase {
-    func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel, DomainError>) -> Void)
+    typealias Result = Swift.Result<AccountModel, DomainError>
+    func add(addAccountModel: AddAccountModel, completion: @escaping (Result) -> Void)
 }

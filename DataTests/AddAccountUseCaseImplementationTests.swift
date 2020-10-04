@@ -95,7 +95,7 @@ extension AddAccountUseCaseImplementationTests {
         return sut
     }
     
-    func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: Result<AccountModel, DomainError>, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
+    func expect(_ sut: AddAccountUseCaseImplementation, completeWith expectedResult: AddAccountUseCase.Result, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
         let expec = expectation(description: "wait")
         let addAccountModel = TestTools.createAddAccount()
         sut.add(addAccountModel: addAccountModel) { receivedResult in
