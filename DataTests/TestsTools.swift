@@ -16,7 +16,7 @@ public struct TestTools {
     }
     
     static func createAccountModel() -> AccountModel {
-        AccountModel(id: "identifier", name: "name", email: "email", password: "password")
+        AccountModel(accessToken: "accessToken")
     }
     
     static func createAddAccount() -> AddAccountModel {

@@ -9,11 +9,20 @@
 import Foundation
 
 public struct AddAccountModel: Codable, Equatable {
-    public let accessToken: String
+    public let name: String
+    public let email: String
+    public let password: String
+    public let passwordConfirmation: String
     
     public init(
-        accessToken: String
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
     ) {
-        self.accessToken = accessToken
+        self.name = name
+        self.email = email
+        self.password = password
+        self.passwordConfirmation = passwordConfirmation
     }
 }
