@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SignInModel {
+public struct SignInModel: Codable, Equatable {
     
     let email: String
     let password: String

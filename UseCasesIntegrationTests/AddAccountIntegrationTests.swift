@@ -17,7 +17,7 @@ class AddAccountIntegrationTests: XCTestCase {
         let expec = expectation(description: "wait")
         let alamofireAdapter = AlamofireAdapter()
         let url = URL(string: "https://clean-node-api.herokuapp.com/api/signup")
-        let sut = AddAccountUseCaseImplementation(
+        let sut = AddAccountUseCaseImp(
             url: url!,
             httpClient: alamofireAdapter
         )

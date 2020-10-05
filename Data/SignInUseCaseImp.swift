@@ -1,15 +1,15 @@
 //
-//  AddAccountUseCaseImplementation.swift
+//  SignInUseCaseImp.swift
 //  Data
 //
-//  Created by Hoff Henry Pereira da Silva on 02/08/20.
+//  Created by Hoff Henry Pereira da Silva on 05/10/20.
 //  Copyright © 2020 Hoff Henry Pereira da Silva. All rights reserved.
 //
 
 import Foundation
 import Domain
 
-public final class AddAccountUseCaseImplementation: AddAccountUseCase {
+public final class SignInUseCaseImp: SignInUseCase {
     
     private let url: URL
     private let httpClient: HttpPostClient
@@ -20,8 +20,8 @@ public final class AddAccountUseCaseImplementation: AddAccountUseCase {
         self.httpClient = httpClient
     }
     
-    public func add(addAccountModel: AddAccountModel, completion: @escaping (Result<AccountModel,DomainError>) -> Void) {
-        httpClient.post(to: url, with: addAccountModel.toData()) { [weak self] result in
+    public func signIn(signInModel: SignInModel, completion: @escaping (Result<AccountModel,DomainError>) -> Void) {
+        httpClient.post(to: url, with: signInModel.toData()) { [weak self] (result) in
             guard self != nil else { return }
             switch result {
             case .failure(let error):
@@ -40,4 +40,5 @@ public final class AddAccountUseCaseImplementation: AddAccountUseCase {
             }
         }
     }
+    
 }

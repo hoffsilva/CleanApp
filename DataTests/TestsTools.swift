@@ -23,6 +23,10 @@ public struct TestTools {
         AddAccountModel(name: "name", email: "email.com", password: "123", passwordConfirmation: "123")
     }
     
+    static func createSignInModel() -> SignInModel {
+        SignInModel(email: "", password: "")
+    }
+    
     static func createInvalidData() -> Data {
         Data()
     }

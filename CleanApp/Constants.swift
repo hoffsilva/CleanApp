@@ -14,5 +14,6 @@ public enum Constants {
     }
     public enum Resource {
         static let signup = "/signup"
+        static let signin = "/signin"
     }
 }

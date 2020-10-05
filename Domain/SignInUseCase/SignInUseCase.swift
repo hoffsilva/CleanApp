@@ -8,8 +8,7 @@
 
 import Foundation
 
-
 public protocol SignInUseCase {
     typealias Result = Swift.Result<AccountModel, DomainError>
-    func add(signInModel: SignInModel, completion: @escaping (Result) -> Void)
+    func signIn(signInModel: SignInModel, completion: @escaping (Result) -> Void)
 }
