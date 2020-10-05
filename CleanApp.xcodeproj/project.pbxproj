@@ -602,6 +602,7 @@
 		0B5796E525164FF500C4457C /* CleanApp */ = {
 			isa = PBXGroup;
 			children = (
+				CAB6C68E252A99E7003AF530 /* New Group */,
 				0B53CD00251D707D0083F431 /* Environment */,
 				0BEA84FB251D69E90064C5F0 /* Proxies */,
 				0B6DD28A251D609000468376 /* Composers */,
@@ -906,6 +907,13 @@
 				CA951992250D8F49004C51FB /* SignUpView.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		CAB6C68E252A99E7003AF530 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		CAF119A6250BA17C00C6E860 /* Views */ = {
