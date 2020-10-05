@@ -13,9 +13,9 @@ import Data
 
 class SignInUseCaseImpTests: XCTestCase {
     
-    func test_add_should_call_httpClient_with_correct_url() {
+    func test_signIn_should_call_httpClient_with_correct_url() {
         
-        let url = URL(string: "https://docs.github.com/en/github")
+        let url = URL(string: "https://docs.github.com")
         let signInModel = TestTools.createSignInModel()
         let httpClient = HttpClientSpy()
         let sut = SignInUseCaseImp(url: TestTools.createUrl(), httpClient: httpClient)
@@ -24,7 +24,7 @@ class SignInUseCaseImpTests: XCTestCase {
         
     }
     
-    func test_add_should_call_httpClient_with_correct_data() {
+    func test_signIn_should_call_httpClient_with_correct_data() {
         
         let signInModel = TestTools.createSignInModel()
         let httpClient = HttpClientSpy()
@@ -35,7 +35,7 @@ class SignInUseCaseImpTests: XCTestCase {
         
     }
     
-    func test_add_should_complete_with_error_when_client_fails() {
+    func test_signIn_should_complete_with_error_when_client_fails() {
         
         let httpClient = HttpClientSpy()
         expect(createSUT(with: httpClient), completeWith: .failure(.unexpected), when: {
@@ -44,7 +44,7 @@ class SignInUseCaseImpTests: XCTestCase {
         
     }
     
-    func test_add_should_complete_with_account_when_client_returns_valid_data() {
+    func test_signIn_should_complete_with_account_when_client_returns_valid_data() {
         
         let expectedAccount = TestTools.createAccountModel()
         let httpClient = HttpClientSpy()
@@ -54,7 +54,7 @@ class SignInUseCaseImpTests: XCTestCase {
         
     }
     
-    func test_add_should_complete_with_error_when_client_returns_invalid_data() {
+    func test_signIn_should_complete_with_error_when_client_returns_invalid_data() {
         
         let httpClient = HttpClientSpy()
         expect(createSUT(with: httpClient), completeWith: .failure(.parseFailed), when: {
@@ -63,21 +63,12 @@ class SignInUseCaseImpTests: XCTestCase {
         
     }
     
-    func test_add_should_complete_with_existent_email_error_when_client_returns_403() {
+    func test_signIn_should_not_complete_when_sut_is_dealocated() {
         
         let httpClient = HttpClientSpy()
-        expect(createSUT(with: httpClient), completeWith: .failure(.emailInUse), when: {
-            httpClient.completionWithError(.fourHundred)
-        })
-        
-    }
-    
-    func test_add_should_not_complete_when_sut_is_dealocated() {
-        
-        let httpClient = HttpClientSpy()
-        var sut : AddAccountUseCaseImp? = createSUT(with: httpClient)
+        var sut : SignInUseCaseImp? = createSUT(with: httpClient)
         var result: Result<AccountModel,DomainError>?
-        sut?.add(addAccountModel: TestTools.createAddAccount(), completion: { result = $0 })
+        sut?.signIn(signInModel: TestTools.createSignInModel(), completion: { result = $0 })
         sut = nil
         httpClient.completionWithError(.noConnectivity)
         XCTAssertNil(result)
@@ -95,10 +86,10 @@ extension SignInUseCaseImpTests {
         return sut
     }
     
-    func expect(_ sut: AddAccountUseCaseImp, completeWith expectedResult: AddAccountUseCase.Result, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
+    func expect(_ sut: SignInUseCaseImp, completeWith expectedResult: AddAccountUseCase.Result, when action: @escaping ()-> Void, file: StaticString = #file, line: UInt = #line) {
         let expec = expectation(description: "wait")
-        let addAccountModel = TestTools.createAddAccount()
-        sut.add(addAccountModel: addAccountModel) { receivedResult in
+        let signInModel = TestTools.createSignInModel()
+        sut.signIn(signInModel: signInModel) { receivedResult in
             switch (expectedResult, receivedResult) {
             case (.failure(let expectedError), .failure(let receivedError)):
                 XCTAssertEqual(expectedError, receivedError, file: file, line: line)

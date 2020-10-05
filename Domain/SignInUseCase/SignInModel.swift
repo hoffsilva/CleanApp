@@ -13,7 +13,7 @@ public struct SignInModel: Codable, Equatable {
     let email: String
     let password: String
     
-    init(
+    public init(
         email: String,
         password: String
     ) {
