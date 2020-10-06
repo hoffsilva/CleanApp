@@ -104,6 +104,9 @@
 		CAB6C6AE252B57CA003AF530 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C6AD252B57CA003AF530 /* SignInModel.swift */; };
 		CAB6C6B9252B5928003AF530 /* SignInUseCaseImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C6B8252B5928003AF530 /* SignInUseCaseImp.swift */; };
 		CAB6C6D6252B5C54003AF530 /* SignInUseCaseImpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C6CC252B5BF9003AF530 /* SignInUseCaseImpTests.swift */; };
+		CAB6C6E1252B9EF6003AF530 /* SignInPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C6E0252B9EF6003AF530 /* SignInPresenterTests.swift */; };
+		CAB6C6F5252C9866003AF530 /* SignInSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C6EB252C9776003AF530 /* SignInSpy.swift */; };
+		CAB6C701252C992E003AF530 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB6C700252C992E003AF530 /* SignInPresenter.swift */; };
 		CAF119A12508FB1600C6E860 /* TestsTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F324DCD34F00277296 /* TestsTools.swift */; };
 		CAF119A3250A51DA00C6E860 /* XCTestCase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8C1F124DCD29300277296 /* XCTestCase+Utils.swift */; };
 		CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF119A4250BA03C00C6E860 /* LoadingView.swift */; };
@@ -442,6 +445,9 @@
 		CAB6C6AD252B57CA003AF530 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		CAB6C6B8252B5928003AF530 /* SignInUseCaseImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseImp.swift; sourceTree = "<group>"; };
 		CAB6C6CC252B5BF9003AF530 /* SignInUseCaseImpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseImpTests.swift; sourceTree = "<group>"; };
+		CAB6C6E0252B9EF6003AF530 /* SignInPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenterTests.swift; sourceTree = "<group>"; };
+		CAB6C6EB252C9776003AF530 /* SignInSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSpy.swift; sourceTree = "<group>"; };
+		CAB6C700252C992E003AF530 /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		CAF119A4250BA03C00C6E860 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -860,7 +866,9 @@
 				CA870BEF24F52B240064266E /* SignUpPresenterTests.swift */,
 				CA870BF124F52B240064266E /* Info.plist */,
 				0B6DD2AA251D64FF00468376 /* AddAccountSpy.swift */,
+				CAB6C6EB252C9776003AF530 /* SignInSpy.swift */,
 				CA2ED7882525E215005291E8 /* ValidationSpy.swift */,
+				CAB6C6E0252B9EF6003AF530 /* SignInPresenterTests.swift */,
 			);
 			path = PresentationTests;
 			sourceTree = "<group>";
@@ -876,6 +884,7 @@
 		CA951967250D7E5B004C51FB /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				CAB6C6FF252C9915003AF530 /* SignIn */,
 				CA951968250D7EAC004C51FB /* SignUp */,
 			);
 			path = Presenter;
@@ -934,6 +943,14 @@
 				CAB6C6AD252B57CA003AF530 /* SignInModel.swift */,
 			);
 			path = SignInUseCase;
+			sourceTree = "<group>";
+		};
+		CAB6C6FF252C9915003AF530 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				CAB6C700252C992E003AF530 /* SignInPresenter.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		CAF119A6250BA17C00C6E860 /* Views */ = {
@@ -1630,6 +1647,7 @@
 				CA870C0724F576880064266E /* SignUpViewModel.swift in Sources */,
 				CA870C0524F5764B0064266E /* AlertView.swift in Sources */,
 				CA870C0924F576A90064266E /* AlertViewModel.swift in Sources */,
+				CAB6C701252C992E003AF530 /* SignInPresenter.swift in Sources */,
 				CAF119A5250BA03C00C6E860 /* LoadingView.swift in Sources */,
 				CA2E4FF925235FCE000EE3AC /* Validation.swift in Sources */,
 			);
@@ -1639,8 +1657,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB6C6E1252B9EF6003AF530 /* SignInPresenterTests.swift in Sources */,
 				0B6DD2AB251D64FF00468376 /* AddAccountSpy.swift in Sources */,
 				CA2ED7892525E215005291E8 /* ValidationSpy.swift in Sources */,
+				CAB6C6F5252C9866003AF530 /* SignInSpy.swift in Sources */,
 				CA870BF024F52B240064266E /* SignUpPresenterTests.swift in Sources */,
 				CAF119A12508FB1600C6E860 /* TestsTools.swift in Sources */,
 				CAF119A3250A51DA00C6E860 /* XCTestCase+Utils.swift in Sources */,

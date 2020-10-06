@@ -24,7 +24,7 @@ public struct TestTools {
     }
     
     static func createSignInModel() -> SignInModel {
-        SignInModel(email: "", password: "")
+        SignInModel(email: "email.com", password: "123")
     }
     
     static func createInvalidData() -> Data {
